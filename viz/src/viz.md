@@ -272,7 +272,7 @@ let submitUserProfile = Inputs.button("Submit Entry",
 
        // Update predictedDepression based on the response
        predictedDepression = result["prediction"];
-       accuracy = result["accuracy"];
+       accuracy = result["probability"][0][predictedDepression];
        console.log("Predicted Depression: ", predictedDepression, " with accuracy: ", accuracy);
      } catch (error) {
        console.error("Error during fetch:", error);
