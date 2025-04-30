@@ -28,19 +28,25 @@ You have clicked ${clicks} times
 .large-data-card{
     background: var(--theme-background-alt);
     border: solid 1px var(--theme-foreground-faintest);
-    border-radius: 0.75rem;
-    padding: 1rem;
+    border-radius: 0.55rem;
+    padding: 1.5rem;
     font: 14px var(--sans-serif);
     grid-row: span 6;
+    background: linear-gradient(135deg, #F7f7F7, #F7F7F7); /* pinkish gradient */
 }
 
 body{
+  margin: 0;
+  padding: 0.1rem; /* More space between body edge and .section blocks */
+  background: linear-gradient(135deg, #E5E3E4, #E5E3E4); /* pinkish gradient */
   max-width: 100vw;
+  font-family: var(--sans-serif);
+  box-sizing: border-box;
 }
 .section {
-  width: 100vw; /* Full width of the viewport */
+  width: 100%; /* Full width of the viewport */
   height: 100vh;
-  max-width: 100%; /* Prevent overflow */
+  max-width: 800px; /* Prevent overflow */
   margin: 0 auto; /* Center the content */
   padding: 1rem; /* Add some padding for spacing */
   box-sizing: border-box; /* Include padding in width calculation */
@@ -204,69 +210,237 @@ function createChart(){
   return svg.node();
 }
 ```
-
-<!-- Feature Cards: template  -->
+<!-- SLIDE 1:  -->
 <div class="section.animated">
-
 <div class="grid grid-cols-2">
-
   <!-- Page Title div -->
   <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
-        What Does Your [Feature] Say?
+        Mapping Mental Health: Predicting Student Depression Risk
       </h1>
   </div>
-
   <!-- Insight div -->
   <div class="card grid-rowspan-3">
-    <h1>Insight for this feature</h1>
-    Our interactive tool lets you explore which lifestyle factors impact depression among students – and see how your habits compare.
+    <h1>Our interactive tool lets you explore which lifestyle factors impact depression among students - and see how your habits compare. </h1>
   </div>
-
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h1>Data title goes here</h1>
+    <h2>Our Data</h2>
     ${display(createChart())}
-      
-  </div>
 
+  </div>
   <!-- User Interaction Div -->
   <div class="card grid-colspan-1 grid-rowspan-3">
-    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
-    <p> should go here </p>
+    <h1 style="font-size: 15px;">Created by: </h1>
+    <p>Srinidhi Jayaprakash, Diego Rivas Lazala, Molly Fei, Stephen Park </p>
   </div>
 </div>
-
 </div>
 
-<!-- Next Feature -->
-<div class="section">
-
+<!-- SLIDE 2:  -->
+<div class="section.animated">
 <div class="grid grid-cols-2">
-
   <!-- Page Title div -->
   <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
-        What Does Your [Feature2] Say?
+        What Does the Data Say?
       </h1>
   </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Explore how sleep, diet, study time, and more relate to Student Depression. </h1>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h2>Exploring the Data</h2>
+    ${display(createChart())}
 
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Click on each bubble to see details on each student data point. </h1>
+  </div>
+</div>
+</div>
+
+<!-- Feature Cards:  -->
+<div class="section.animated">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Do Your Acadenmic Pressure Levels Say?
+      </h1>
+  </div>
   <!-- Insight div -->
   <div class="card grid-rowspan-3">
     <h1>Insight for this feature</h1>
-    Our interactive tool lets you explore which lifestyle factors impact depression among students – and see how your habits compare.
+    <h1></h1>
+    As academic pressure increases, we observe a clear uptick in reported depression levels. Students who rate their academic pressure between 3 and 5 show significantly higher rates of depression than those under less pressure.
   </div>
-
   <!-- Data div -->
-  <div class="large-data-card">
-    <h1>Data title goes here</h1>
-  </div>
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Academic Pressure Levels</h1>
+    ${display(createChart())}
 
+  </div>
   <!-- User Interaction Div -->
   <div class="card grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
-    <p> should go here </p>
+    <p> Rate your academic pressure on a scale from 1 to 5 </p>
   </div>
 </div>
+</div>
+
+<!-- Feature Cards:  -->
+<div class="section.animated">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Do Your Sleep Habits Say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Insight for this feature</h1>
+    <h1></h1>
+    While there isn't a strong correlation between sleep duration and depression, students who sleep fewer than 6 hours per night tend to report slightly higher levels of depression compared to their peers.
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Number of Sleep Hours</h1>
+    ${display(createChart())}
+    
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your sleep hours on a scale from 1 to 5 </p>
+  </div>
+</div>
+</div>
+
+<!-- Feature Cards:  -->
+<div class="section.animated">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Do Your Study Habits and Study Hours Say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Insights</h1>
+    <br>
+    Higher satisfaction with studying is linked to lower depression counts; higher study satisfaction can lead to better mental well-being by fostering a sense of accomplishment and reducing stress. <br><br>
+    Increased study hours often correlate with higher levels of depression, suggesting that overworking can lead to burnout. 
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Study Satisfaction Levels</h1>
+    <!********STUDY SATISFACTION CHART GOES HERE*********!>
+    <h1>Depression by Study Hour Levels</h1>
+    <!********STUDY HOURS CHART GOES HERE*********!>
+    
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your study satisfaction on a scale from 1 to 5 </p>
+    <br><br><br><br>
+    <p> Rate your study satisfaction on a scale from 1 to 5 </p>
+  </div>
+</div>
+</div>
+
+
+<!-- Feature Cards:  -->
+<div class="section.animated">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Does Your Financial Stress Say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Insight for this feature</h1>
+    <h1></h1>
+    Similar to academic pressure, higher financial stress is strongly linked to increased depression rates. Constant worry about finances, such as debt or instability, can lead to feelings of helplessness and anxiety, which negatively impact mental health and contribute to depression.
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Financial Stress Levels</h1>
+    ${display(createChart())}
+    
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your financial stress on a scale from 1 to 5 </p>
+  </div>
+</div>
+</div>
+
+
+<!-- Feature Cards:  -->
+<div class="section.animated">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Does Your Financial Stress Say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Insight for this feature</h1>
+    <h1></h1>
+    Similar to academic pressure, higher financial stress is strongly linked to increased depression rates. Constant worry about finances, such as debt or instability, can lead to feelings of helplessness and anxiety, which negatively impact mental health and contribute to depression.
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Financial Stress Levels</h1>
+    ${display(createChart())}
+    
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your financial stress on a scale from 1 to 5 </p>
+  </div>
+</div>
+</div>
+
+<!-- Insights Summary Card:  -->
+<div class="section.animated">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        Insights Summary from Lifestyle Factors
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1 style="font-size: 17px;">What patterns emerge when we compare student life habits with reported depression? Our data shows clear trends between specific stressors and mental health outcomes.?</h1>
+    <h1></h1>
+    <p>Academic Pressure: As academic pressure increases, the count of students with depression also increases.<br><br>
+    Financial Stress: Similar to academic pressure, higher financial stress is strongly associated with higher depression rates.<br><br>
+    Study Satisfaction: Higher satisfaction with studying is linked to lower depression counts.<br><br>
+    Study Hours: More study hours tend to correlate with higher depression, possibly pointing to overwork or burnout.<br><br>
+    Sleep Duration: Students sleeping less than 6 hours have a slightly higher count of depression, although not a significant difference.</p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Trend Highlights</h1>
+    <img src="image.png" width="620" height="410" /> 
+  </div>
+</div>
+
+
 
 </div>
