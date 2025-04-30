@@ -285,7 +285,7 @@ let submitUserProfile = Inputs.button("Submit Entry",
 ```
 
 <!-- This is how you view the input interactions-->
-```js
+<!-- ```js
 view(genderInput);
 view(ageInput); 
 view(studySatisfactionInput); 
@@ -298,7 +298,7 @@ view(financialStressInput);
 view(familyHistory);
 view(realDepression);
 display(submitUserProfile);
-```
+``` -->
 
 <!-- Feature Cards: template  -->
 <div class="section.animated" >
