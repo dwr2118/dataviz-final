@@ -36,28 +36,75 @@ You have clicked ${clicks} times
 
 body{
   max-width: 100vw;
+  overflow: hidden; /* Prevent body-level scrolling */
 }
 .section {
+  position: absolute;
   width: 100vw; /* Full width of the viewport */
   height: 100vh;
   max-width: 100%; /* Prevent overflow */
   margin: 0 auto; /* Center the content */
+  margin-bottom: 20vh;
   padding: 1rem; /* Add some padding for spacing */
   box-sizing: border-box; /* Include padding in width calculation */
+  overflow-y: auto; /* Allow section-level scrolling */
+  padding: 40px;
   opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
+  z-index: 0;
 }
 
-.section.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
+.section.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
+    }
+
+.section-content {
+      margin: 0 auto;
+    }
+
+.scroll-button {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      font-size: 1rem;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .scroll-button:hover {
+      background-color: #0056b3;
+    }
+
+    .scroll-button.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #scroll-down {
+      bottom: 20px;
+    }
+
+    #scroll-up {
+      top: 20px;
+    }
 </style>
 
-
+<!-- >
 ```js 
 // animating the pages upon scrolling
+view(Inputs.button("Click 🙁me"));
+
 const featureCards = document.querySelectorAll(".section");
 
 const animateOnScroll = () => {
@@ -89,7 +136,7 @@ window.addEventListener("keydown", animateOnKeyPress);
 
 featureCards;
 ```
-
+<!-- -->
 
 ```js
 // pulling in the JSON created from the csv 
@@ -206,7 +253,10 @@ function createChart(){
 ```
 
 <!-- Feature Cards: template  -->
-<div class="section.animated">
+
+<body>
+<div class="section active" id="section-0">
+<div class = "section-content">
 
 <div class="grid grid-cols-2">
 
@@ -238,10 +288,11 @@ function createChart(){
 </div>
 
 </div>
+</div>
 
 <!-- Next Feature -->
-<div class="section">
-
+<div class="section" id="section-1">
+<div class = "section-content">
 <div class="grid grid-cols-2">
 
   <!-- Page Title div -->
@@ -270,3 +321,58 @@ function createChart(){
 </div>
 
 </div>
+</div>
+
+
+<button id="scroll-up" class="scroll-button hidden" onclick="scrollToPrevious()">↑ Up</button>
+<button id="scroll-down" class="scroll-button" onclick="scrollToNext()">↓ Down</button>
+<script>
+  const sections = document.querySelectorAll('.section');
+    const btnUp = document.getElementById('scroll-up');
+    const btnDown = document.getElementById('scroll-down');
+    let currentIndex = 0;
+    let isTransitioning = false;
+
+    function updateButtons() {
+      btnUp.classList.toggle('hidden', currentIndex === 0);
+      btnDown.classList.toggle('hidden', currentIndex === sections.length - 1);
+    }
+
+    function transitionToSection(index) {
+      if (isTransitioning || index === currentIndex || index < 0 || index >= sections.length) return;
+      isTransitioning = true;
+
+      const current = sections[currentIndex];
+      const next = sections[index];
+
+      current.classList.remove('active');
+
+      // Wait for fade out, then show new section
+      setTimeout(() => {
+        next.scrollTop = 0; // Reset scroll position
+        next.classList.add('active');
+        currentIndex = index;
+        updateButtons();
+        isTransitioning = false;
+      }, 250); // Must match CSS transition time
+    }
+
+    function scrollToNext() {
+      transitionToSection(currentIndex + 1);
+    }
+
+    function scrollToPrevious() {
+      transitionToSection(currentIndex - 1);
+    }
+
+    // Prevent manual section switching
+    window.addEventListener('keydown', e => {
+      const keys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' '];
+      if (keys.includes(e.key)) {
+        e.preventDefault();
+      }
+    });
+
+    updateButtons();
+</script>
+</body>
