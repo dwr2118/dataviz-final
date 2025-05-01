@@ -243,118 +243,10 @@ function createChart(){
   return svg.node();
 }
 ```
-
-<!-- Storing the user's input for the ML predictor -->
-```js
-let genderInput = Inputs.select([null,"Male","Female","Not Specified"], {label: "Gender"});
-let ageInput = Inputs.range([18,35], {value: 18, step: 1, label: "Age"}); // range function
-let studySatisfactionInput = Inputs.select(([null,1,2,3,4,5]), {label: "Study Satisifcation", placeholder:""});
-let sleepInput = Inputs.select(([null,"Less than 5 hours","5-6 hours","7-8 hours","More than 8 hours"]), {label: "Sleep Duration"});
-let dietInput = Inputs.select(([null,"Unhealthy","Moderate","Healthy"]), {label: "Dietary Habits", placeholder:""});
-let academicPressureInput = Inputs.select([1,2,3,4,5], {step: 1, label: "Academic Pressure"}); // range function
-let suicideThoughtsInput = Inputs.select(([null,"Yes","No"]), {label: "Have you ever had suicidal thoughts?", placeholder:""});
-let studyHoursInput = Inputs.range([0,24], {value: 0, step: 1, label: "Study Hours"});
-let financialStressInput = Inputs.select(([null,1,2,3,4,5]), {label: "Financial Stress", placeholder:""});
-let familyHistory = Inputs.select(([null,"Yes","No"]), {label: "Family History of Mental Illness"});
-let realDepression = Inputs.select(([null,"Yes","No"]), {label: "Do you have depression?", placeholder:""});
-
-// Alternative approach with a mutable object and update function
-let userProfile = {
-  "Gender": null,
-  "Age": null,
-  "Academic Pressure": null,
-  "Study Satisfaction": null,
-  "Sleep Duration": null,
-  "Dietary Habits": null,
-  "Have you ever had suicidal thoughts ?": null, 
-  "Study Hours": null,
-  "Financial Stress": null,
-  "Family History of Mental Illness": null,
-  "Actual Depression": null,
-};
-
-function updateUserProfile() {
-  userProfile["Gender"] = genderInput.value;
-  userProfile["Age"] = ageInput.value;
-  userProfile["Study Satisfaction"] = studySatisfactionInput.value;
-  userProfile["Academic Pressure"] = academicPressureInput.value;
-  userProfile["Sleep Duration"] = sleepInput.value;
-  userProfile["Dietary Habits"] = dietInput.value;
-  userProfile["Have you ever had suicidal thoughts ?"] = suicideThoughtsInput.value;
-  userProfile["Study Hours"] = studyHoursInput.value;
-  userProfile["Financial Stress"] = financialStressInput.value;
-  userProfile["Family History of Mental Illness"] = familyHistory.value;
-  userProfile["Actual Depression"] = realDepression.value;
-  
-  return userProfile;
-}
-``` 
-
-<!-- writing the userProfile to a json file so the json can be parsed by the ML predictor -->
-```js
-import confetti from "canvas-confetti";
-
-let predictedDepression = null;
-let accuracy = null;
-
-// send the user's profile to be processed by the backend Flask server
-// where the classifier model lives 
-let submitUserProfile = Inputs.button("Submit Entry", 
-  {value: null, 
-   reduce: async () => { // Make the reduce function async
-     updateUserProfile();
-     
-     try {
-       // Send the POST request
-       const response = await fetch("http://localhost:3005/save-profile", {
-         method: "POST",
-         headers: { "Content-Type": "application/json" },
-         body: JSON.stringify(userProfile),
-       });
-
-       // Log the response status
-       console.log("Response Status:", response.status);
-
-       // Optionally, parse the response JSON if needed
-       const result = await response.json();
-       console.log("Response Body:", result); 
-
-       // Update predictedDepression based on the response
-       predictedDepression = result["prediction"];
-       accuracy = result["probability"][0][predictedDepression];
-       console.log("Predicted Depression: ", predictedDepression, " with accuracy: ", accuracy);
-     } catch (error) {
-       console.error("Error during fetch:", error);
-     }
-
-     return true;
-   },
-   label: "Are you ready to see yourself in the data?"
-  });
-```
-
-<!-- This is how you view the input interactions-->
-<!-- ```js
-view(genderInput);
-view(ageInput); 
-view(studySatisfactionInput); 
-view(sleepInput);
-view(dietInput);
-view(academicPressureInput);
-view(suicideThoughtsInput);
-view(studyHoursInput);
-view(financialStressInput);
-view(familyHistory);
-view(realDepression);
-display(submitUserProfile);
-``` -->
-
 <!-- SLIDE 1:  -->
 <body>
 <div class="section active" id="section-0">
 <div class = "section-content">
-
-
 <div class="grid grid-cols-2">
 
   <!-- Page Title div -->
@@ -461,6 +353,7 @@ display(submitUserProfile);
   </div>
   <!-- Insight div -->
   <div class="card grid-rowspan-3">
+
     <h1>Insight for this feature</h1>
     <h1></h1>
     As academic pressure increases, we observe a clear uptick in reported depression levels. Students who rate their academic pressure between 3 and 5 show significantly higher rates of depression than those under less pressure.
@@ -508,6 +401,167 @@ display(submitUserProfile);
   <div class="card grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your sleep hours on a scale from 1 to 5 </p>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Feature Cards:  -->
+<div class="section" id="section-5">
+<div class = "section-content">
+
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Do Your Study Habits and Study Hours Say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Insights</h1>
+    <br>
+    Higher satisfaction with studying is linked to lower depression counts; higher study satisfaction can lead to better mental well-being by fostering a sense of accomplishment and reducing stress. <br><br>
+    Increased study hours often correlate with higher levels of depression, suggesting that overworking can lead to burnout. 
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Study Satisfaction Levels</h1>
+    <!********STUDY SATISFACTION CHART GOES HERE*********!>
+    <h1>Depression by Study Hour Levels</h1>
+    <!********STUDY HOURS CHART GOES HERE*********!>
+    
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your study satisfaction on a scale from 1 to 5 </p>
+    <br><br><br><br>
+    <p> Rate your study satisfaction on a scale from 1 to 5 </p>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Insights Summary Card:  -->
+<div class="section" id="section-6">
+<div class = "section-content">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What do Your Dietary Habits say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1 style="font-size: 17px;">Insight</h1>
+    <h1></h1>
+    <p>Similar to study habits, worse dietary habits are correlated with increased depression rates. Worse dietary habits can have a negative impact on physical and mental health generally, and may also be an indication of financial stress.</p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression and Dietary Habits Chart</h1>
+    <img src="image.png" width="620" height="410" /> 
+  </div>
+
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your dietary habits on a scale from 1 to 5 </p>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- Feature Cards:  -->
+<div class="section" id="section-7">
+<div class = "section-content">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Does Your Financial Stress Say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Insight for this feature</h1>
+    <h1></h1>
+    Similar to academic pressure, higher financial stress is strongly linked to increased depression rates. Constant worry about finances, such as debt or instability, can lead to feelings of helplessness and anxiety, which negatively impact mental health and contribute to depression.
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Financial Stress Levels</h1>
+    ${display(createChart())}
+    
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your financial stress on a scale from 1 to 5 </p>
+  </div>
+</div>
+</div>
+</div>
+
+
+<!-- Insights Summary Card:  -->
+<div class="section" id="section-8">
+<div class = "section-content">
+
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        Insights Summary from Lifestyle Factors
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3" style="grid-row: span 6;">
+    <br><h1 style="font-size: 20px;">What patterns emerge when we compare student life habits with reported depression? Our data shows clear trends between specific stressors and mental health outcomes.?</h1>
+    <h1></h1>
+    <br><br>
+    <p style="font-size: 18px;">Financial Stress: Similar to academic pressure, higher financial stress is strongly associated with higher depression rates.<br><br><br>
+    Study Satisfaction: Higher satisfaction with studying is linked to lower depression counts.<br><br><br>
+    Academic Pressure: As academic pressure increases, the count of students with depression also increases.<br><br><br>
+    Study Hours: More study hours tend to correlate with higher depression, possibly pointing to overwork or burnout.<br><br><br>
+    Sleep Duration: Students sleeping less than 6 hours have a slightly higher count of depression, although not a significant difference.<br><br><br>
+    Dietary Habits: Poorer dietary habits are more prevalent among depressed students.
+    </p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Financial Stress Levels</h1>
+    <img src="image.png" width="700" height="450" />
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Insights Summary Card:  -->
+<div class="section" id="section-9">
+<div class = "section-content">
+
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What does your Personal and Family History with Depression say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1 style="font-size: 17px;">Insight</h1>
+    <h1></h1>
+    <p>Depression rates are noticably higher among students who have a family history of a depression or who have had suicidal thoughts themselves. Both of these may be correlated with genetic or social predispositions to depression.</p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Family History of Depression Chart</h1>
+    <img src="image.png" width="620" height="410" /> 
   </div>
 </div>
 
@@ -578,7 +632,10 @@ display(submitUserProfile);
   <!-- User Interaction Div -->
   <div class="card grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
-    <p> Rate your financial stress on a scale from 1 to 5 </p>
+    <p>Have you ever had suicidal thoughts?</pr>
+    <br><br><br><br>
+    <p>Do you have a family history of depression?</pr>
+    </p>
   </div>
 </div>
 </div>
@@ -615,9 +672,10 @@ display(submitUserProfile);
 </div>
 </div>
 </div>
+</div>
 
   <!-- Insights Summary Card:  -->
-<div class="section" id="section-8">
+<div class="section" id="section-10">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">

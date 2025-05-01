@@ -17,7 +17,9 @@ footer:
 .large-data-card{
     padding: 1.5rem;
     font: 14px var(--sans-serif);
-    grid-row: span 6;
+    grid-row: span 4;
+    grid-column span 2;
+
 }
 
 body{
@@ -98,22 +100,24 @@ p {
     }
 
     #scroll-down {
-      bottom: 20px;
+      bottom: 5px;
     }
 
     #scroll-up {
-      top: 20px;
+      top: 5px;
     }
 
 .card-borderless {
     padding: 1rem;
     margin: 1rem 0;
     font: 14px var(--sans-serif);
+    grid-row: span 1;
+    grid-column: span 1;
 }
 
 #prediction-results p {
     font-size: 16px; /* Match the font size of other paragraphs */
-    color: inherit;  /* Inherit the color from the parent container */
+    color: black;  /* Inherit the color from the parent container */
     line-height: 1.5; /* Match the line height for better readability */
     margin: 0.5rem 0; /* Add consistent spacing between lines */
 }
@@ -134,7 +138,7 @@ p {
 <!-- SLIDE 1: Title landing page -->
 <body>
 
-<div class="section" id="section-0">
+<div class="section active" id="section-0">
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
@@ -154,7 +158,7 @@ p {
   </div>
 
   <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap; grid-column: span 1;">
     ${display(createChart())}
 
   </div>
@@ -165,7 +169,6 @@ p {
 <!-- SLIDE 2: What does the data say? -->
 <div class="section" id="section-1">
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -182,7 +185,7 @@ p {
   </div>
   </div>
   <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap; grid-column: span 1;">
     ${display(createChart())}
 
   </div>
@@ -195,28 +198,29 @@ p {
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-2 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         What Does Your Age and Gender Say?
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card-borderless grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-1">
     <h1>Insights</h1>
     <h1></h1>
     <p>Younger students tend to report higher levels of depression, possibly due to transitional stress and academic pressure. Additionally, female and non-binary students show higher average depression scores compared to male students, reflecting broader mental health disparities across gender identities.</p>
   </div>
-  <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h1>Depression by Age</h1><br><br> <div id="chart-container-age"> ${view(startAge)} </div>
-    <h1>Depression by Gender</h1> <div id="chart-container-gender"> ${view(startGender)} </div>
 
-  </div>
   <!-- User Interaction Div -->
-  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-1">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1><br><br>
     <p> Enter Your Age: ${view(ageInput)} </p> <br><br><br>
     <p> Enter Your Gender: ${view(genderInput)}</p>
+  </div>
+
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Age</h1><br><br> <div id="chart-container-age"> ${view(startAge)} </div>
+    <h1>Depression by Gender</h1> <div id="chart-container-gender"> ${view(startGender)} </div>
   </div>
 </div>
 </div>
@@ -224,7 +228,7 @@ p {
 
 
 <!-- Feature Cards: Academic Pressure -->
-<div class="section active" id="section-3">
+<div class="section" id="section-3">
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
@@ -234,23 +238,24 @@ p {
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card-borderless grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-1">
     <h1>Insight for this feature</h1>
     <h1></h1>
     <p>As academic pressure increases, we observe a clear uptick in reported depression levels. Students who rate their academic pressure between 3 and 5 show significantly higher rates of depression than those under less pressure.</p>
     
   </div>
-    <!-- User Interaction Div -->
-  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
+
+   <!-- User Interaction Div -->
+  <div class="card-borderless grid-colspan-1 grid-rowspan-1">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your academic pressure on a scale from 1 to 5 </p>
     <p> ${view(academicPressureInput)}</p>
   </div>
+
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Academic Pressure Levels</h1>
     <div id="chart-container-academic">${view(startAcademic)} </div>
-
   </div>
 </div>
 
@@ -269,23 +274,26 @@ p {
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card-borderless grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-1">
     <h1>Insight for this feature</h1>
     <h1></h1>
     <p>While there isn't a strong correlation between sleep duration and depression, students who sleep fewer than 6 hours per night tend to report slightly higher levels of depression compared to their peers.</p>
   </div>
+
+  <!-- User Interaction Div -->
+  <div class="card-borderless grid-colspan-1 grid-rowspan-`">
+    <h1 style="font-size: x;">Curious where you fit in?</h1>
+    <p> Rate your sleep hours on a scale from 1 to 5 </p>
+    <p> ${view(sleepInput)}</p>
+  </div>
+
   <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+  <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Number of Sleep Hours</h1>
     <div id="chart-container-sleep"> ${view(startSleep)} </div>
     
   </div>
-  <!-- User Interaction Div -->
-  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
-    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
-    <p> Rate your sleep hours on a scale from 1 to 5 </p>
-    <p> ${view(sleepInput)}</p>
-  </div>
+
 </div>
 
 </div>
@@ -303,7 +311,7 @@ p {
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card-borderless grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-1">
     <h1>Insights</h1>
     <br>
     <p>
@@ -312,23 +320,20 @@ p {
     </p>
     
   </div>
-  <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h1>Depression by Study Satisfaction Levels</h1>
-    <div id="chart-container-satis"> ${view(startSatisfaction)}</div>
-    
-    <h1>Depression by Study Hour Levels</h1>
-    <!********NEED A STUDY HOUR VIZ HERE*********!>
-    
-  </div>
+
   <!-- User Interaction Div -->
-  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-1">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your study satisfaction on a scale from 1 to 5 </p>
     <p> ${view(studySatisfactionInput)} </p>
     <br><br><br><br>
     <p> Enter the amount of hours you typically study weekly </p>
     <p> ${view(studyHoursInput)} </p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Study Satisfaction Levels</h1>
+    <div id="chart-container-satis"> ${view(startSatisfaction)}</div>
   </div>
 </div>
 </div>
@@ -347,23 +352,23 @@ p {
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card-borderless grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-1">
     <h1>Insight for this feature</h1>
     <h1></h1>
     <p>Similar to academic pressure, higher financial stress is strongly linked to increased depression rates. Constant worry about finances, such as debt or instability, can lead to feelings of helplessness and anxiety, which negatively impact mental health and contribute to depression.</p>
   </div>
+  <!-- User Interaction Div -->
+  <div class="card-borderless grid-colspan-1 grid-rowspan-1">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your financial stress on a scale from 1 to 5 </p>
+    <p> ${view(financialStressInput)} </p>
+  </div>  
   <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+  <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Financial Stress Levels</h1>
     <div id="chart-container-finance"> ${view(startFinancialStress)}</div>
     
     
-  </div>
-  <!-- User Interaction Div -->
-  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
-    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
-    <p> Rate your financial stress on a scale from 1 to 5 </p>
-    <p> ${view(financialStressInput)} </p>
   </div>
 </div>
 </div>
@@ -382,7 +387,7 @@ p {
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card-borderless grid-rowspan-3" style="grid-row: span 6;">
+  <div class="card-borderless" style="grid-row: span 6;">
     <br><h1 style="font-size: 20px;">What patterns emerge when we compare student life habits with reported depression? Our data shows clear trends between specific stressors and mental health outcomes.?</h1>
     <h1></h1>
     <br><br>
@@ -393,7 +398,7 @@ p {
     Sleep Duration: Students sleeping less than 6 hours have a slightly higher count of depression, although not a significant difference.</p>
   </div>
   <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+  <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Financial Stress Levels</h1>
     <img src="image.png" width="700" height="450" />
   </div>
@@ -675,6 +680,7 @@ let submitUserProfile = Inputs.button("Get Prediction",
 
        // Update the HTML content of the #prediction-results div
        const resultsDiv = document.getElementById("prediction-results");
+       resultsDiv.innerHTML = "";
        resultsDiv.innerHTML = `
          <p><strong>Prediction:</strong> ${predictedDepression === 1 ? "Higher Risk of Depression" : "Lower Risk of Depression"}</p>
          <p><strong>Confidence:</strong> ${(accuracy * 100).toFixed(2)}%</p>

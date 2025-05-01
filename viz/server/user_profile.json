@@ -1,13 +1,13 @@
 {
-  "Gender": "Male",
-  "Age": 22,
-  "Academic Pressure": 5,
-  "Study Satisfaction": 1,
-  "Sleep Duration": "Less than 5 hours",
-  "Dietary Habits": "Moderate",
-  "Have you ever had suicidal thoughts ?": "Yes",
-  "Study Hours": 1,
-  "Financial Stress": 5,
-  "Family History of Mental Illness": "Yes",
+  "Gender": null,
+  "Age": 18,
+  "Academic Pressure": 1,
+  "Study Satisfaction": null,
+  "Sleep Duration": null,
+  "Dietary Habits": null,
+  "Have you ever had suicidal thoughts ?": null,
+  "Study Hours": 0,
+  "Financial Stress": null,
+  "Family History of Mental Illness": null,
   "Actual Depression": null
 }
