@@ -1024,6 +1024,8 @@ const chart = (category, startClick) => {
 ```
 
 ```js
+// TODO: add this to all animations, fix chart styling and text styling to make it look neat
+// and record video 
 // animation button definitions 
 const startSleep          = Inputs.button("Start Sleep Duration");
 const startAcademic       = Inputs.button("Start Academic Pressure");
