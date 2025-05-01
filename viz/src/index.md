@@ -143,19 +143,16 @@ h1, h2, h3, p, li {
   <!-- Insight div -->
   <div class="card-borderless grid-rowspan-3">
     <h1>Our interactive tool lets you explore which lifestyle factors impact depression among students - and see how your habits compare. </h1>
+    <br>
+  <!-- User Interaction Div -->
+    <h1 style="font-size: 15px;">Created by: </h1>
+    <p>Srinidhi Jayaprakash, Diego Rivas Lazala, Molly Fei, Stephen Park </p>
   </div>
 
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h2>Our Data</h2>
     ${display(createChart())}
 
-  </div>
-
-  <!-- User Interaction Div -->
-  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
-    <h1 style="font-size: 15px;">Created by: </h1>
-    <p>Srinidhi Jayaprakash, Diego Rivas Lazala, Molly Fei, Stephen Park </p>
   </div>
 </div>
 </div>
@@ -492,7 +489,7 @@ const data = FileAttachment("./data/data.json").json();
 // displaying the d3 svg node created from the depression data
 function createChart(){
   const displayData = data; // Modify this if you need to filter or transform the data
-  const width = 500, height = 600, margin = { top: 80, right: 50, bottom: 120, left: 50 };
+  const width = 500, height = 500, margin = { top: 80, right: 50, bottom: 120, left: 50 };
   const r = 8; // Fixed radius
   
   const svg = d3.create("svg")
