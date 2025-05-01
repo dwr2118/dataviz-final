@@ -184,12 +184,8 @@ body{
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h1>Depression by Age</h1><br><br>
-    ${view(startAge)}
-    ${view(chart("Age",startAge))}
-    <h1>Depression by Gender</h1>
-    ${view(startGender)}
-    ${view(chart("Gender",startGender))}
+    <div id="chart-container-age"><h1>Depression by Age</h1><br><br> ${view(startAge)} </div>
+    <div id="chart-container-gender"><h1>Depression by Gender</h1> ${view(startGender)}</div>
 
   </div>
   <!-- User Interaction Div -->
@@ -258,7 +254,6 @@ body{
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Number of Sleep Hours</h1>
     ${view(startSleep)}
-    ${view(chart("Sleep Duration",startSleep))}
     
   </div>
   <!-- User Interaction Div -->
@@ -380,7 +375,7 @@ body{
 </div>
 
  <!-- ML Predictor Card -->
- <div class="section active" id="section-8">
+ <div class="section" id="section-8">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -1034,8 +1029,28 @@ const startSleep          = Inputs.button("Start Sleep Duration");
 const startAcademic       = Inputs.button("Start Academic Pressure");
 const startSatisfaction   = Inputs.button("Start Study Satisfaction");
 const startDietary        = Inputs.button("Start Dietary Habits");
-const startAge            = Inputs.button("Start Age");
-const startGender         = Inputs.button("Start Gender");
+
+const startAge = Inputs.button("Start Age", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-age");
+    container.innerHTML = ""; // Clear any existing chart
+    let ageChart = chart("Age", startAge);
+    container.appendChild(ageChart); // Render the chart
+  }
+});
+
+// chart-container-gender
+
+const startGender         = Inputs.button("Start Gender", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-gender");
+    container.innerHTML = ""; // Clear any existing chart
+    let genderChart = chart("Gender", startGender);
+    container.appendChild(genderChart); // Render the chart
+  }
+});
+
+
 const startFamilyHistory  = Inputs.button("Start Family History"); 
 const startFinancialStress = Inputs.button("Start Financial Stress"); 
 ```
