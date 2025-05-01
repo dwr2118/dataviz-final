@@ -268,7 +268,7 @@ let submitUserProfile = Inputs.button("Submit Entry",
 
        // Optionally, parse the response JSON if needed
        const result = await response.json();
-       console.log("Response Body:", result);
+       console.log("Response Body:", result); 
 
        // Update predictedDepression based on the response
        predictedDepression = result["prediction"];
