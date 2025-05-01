@@ -117,7 +117,7 @@ p {
 
 #prediction-results p {
     font-size: 16px; /* Match the font size of other paragraphs */
-    color: inherit;  /* Inherit the color from the parent container */
+    color: black;  /* Inherit the color from the parent container */
     line-height: 1.5; /* Match the line height for better readability */
     margin: 0.5rem 0; /* Add consistent spacing between lines */
 }
@@ -680,6 +680,7 @@ let submitUserProfile = Inputs.button("Get Prediction",
 
        // Update the HTML content of the #prediction-results div
        const resultsDiv = document.getElementById("prediction-results");
+       resultsDiv.innerHTML = "";
        resultsDiv.innerHTML = `
          <p><strong>Prediction:</strong> ${predictedDepression === 1 ? "Higher Risk of Depression" : "Lower Risk of Depression"}</p>
          <p><strong>Confidence:</strong> ${(accuracy * 100).toFixed(2)}%</p>
