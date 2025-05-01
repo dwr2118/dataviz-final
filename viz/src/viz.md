@@ -7,17 +7,6 @@ pager: false
 footer:
 ---
 
-
-<!-- # Depression Viz  -->
-<!-- ```js
-const clicks = view(Inputs.button("Click 🙁me"));
-```
-
-You have clicked ${clicks} times
- -->
-
-<!-- Load and transform the data -->
-
 <!-- A shared color scale for consistency, sorted by the number of launches -->
 <style>
 .no-max-width {
@@ -139,12 +128,13 @@ featureCards;
 */
 ```
 
-
+<!-- loading chart data-->
 ```js
 // pulling in the JSON created from the csv 
 const data = FileAttachment("./data/data.json").json();
 ```
 
+<!-- chart definition -->
 ```js
 // displaying the json created from the depression data csv
 // display(data);
@@ -253,10 +243,117 @@ function createChart(){
   return svg.node();
 }
 ```
+
+<!-- Storing the user's input for the ML predictor -->
+```js
+let genderInput = Inputs.select([null,"Male","Female","Not Specified"], {label: "Gender"});
+let ageInput = Inputs.range([18,35], {value: 18, step: 1, label: "Age"}); // range function
+let studySatisfactionInput = Inputs.select(([null,1,2,3,4,5]), {label: "Study Satisifcation", placeholder:""});
+let sleepInput = Inputs.select(([null,"Less than 5 hours","5-6 hours","7-8 hours","More than 8 hours"]), {label: "Sleep Duration"});
+let dietInput = Inputs.select(([null,"Unhealthy","Moderate","Healthy"]), {label: "Dietary Habits", placeholder:""});
+let academicPressureInput = Inputs.select([1,2,3,4,5], {step: 1, label: "Academic Pressure"}); // range function
+let suicideThoughtsInput = Inputs.select(([null,"Yes","No"]), {label: "Have you ever had suicidal thoughts?", placeholder:""});
+let studyHoursInput = Inputs.range([0,24], {value: 0, step: 1, label: "Study Hours"});
+let financialStressInput = Inputs.select(([null,1,2,3,4,5]), {label: "Financial Stress", placeholder:""});
+let familyHistory = Inputs.select(([null,"Yes","No"]), {label: "Family History of Mental Illness"});
+let realDepression = Inputs.select(([null,"Yes","No"]), {label: "Do you have depression?", placeholder:""});
+
+// Alternative approach with a mutable object and update function
+let userProfile = {
+  "Gender": null,
+  "Age": null,
+  "Academic Pressure": null,
+  "Study Satisfaction": null,
+  "Sleep Duration": null,
+  "Dietary Habits": null,
+  "Have you ever had suicidal thoughts ?": null, 
+  "Study Hours": null,
+  "Financial Stress": null,
+  "Family History of Mental Illness": null,
+  "Actual Depression": null,
+};
+
+function updateUserProfile() {
+  userProfile["Gender"] = genderInput.value;
+  userProfile["Age"] = ageInput.value;
+  userProfile["Study Satisfaction"] = studySatisfactionInput.value;
+  userProfile["Academic Pressure"] = academicPressureInput.value;
+  userProfile["Sleep Duration"] = sleepInput.value;
+  userProfile["Dietary Habits"] = dietInput.value;
+  userProfile["Have you ever had suicidal thoughts ?"] = suicideThoughtsInput.value;
+  userProfile["Study Hours"] = studyHoursInput.value;
+  userProfile["Financial Stress"] = financialStressInput.value;
+  userProfile["Family History of Mental Illness"] = familyHistory.value;
+  userProfile["Actual Depression"] = realDepression.value;
+  
+  return userProfile;
+}
+``` 
+
+<!-- writing the userProfile to a json file so the json can be parsed by the ML predictor -->
+```js
+import confetti from "canvas-confetti";
+
+let predictedDepression = null;
+let accuracy = null;
+
+// send the user's profile to be processed by the backend Flask server
+// where the classifier model lives 
+let submitUserProfile = Inputs.button("Submit Entry", 
+  {value: null, 
+   reduce: async () => { // Make the reduce function async
+     updateUserProfile();
+     
+     try {
+       // Send the POST request
+       const response = await fetch("http://localhost:3005/save-profile", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(userProfile),
+       });
+
+       // Log the response status
+       console.log("Response Status:", response.status);
+
+       // Optionally, parse the response JSON if needed
+       const result = await response.json();
+       console.log("Response Body:", result); 
+
+       // Update predictedDepression based on the response
+       predictedDepression = result["prediction"];
+       accuracy = result["probability"][0][predictedDepression];
+       console.log("Predicted Depression: ", predictedDepression, " with accuracy: ", accuracy);
+     } catch (error) {
+       console.error("Error during fetch:", error);
+     }
+
+     return true;
+   },
+   label: "Are you ready to see yourself in the data?"
+  });
+```
+
+<!-- This is how you view the input interactions-->
+<!-- ```js
+view(genderInput);
+view(ageInput); 
+view(studySatisfactionInput); 
+view(sleepInput);
+view(dietInput);
+view(academicPressureInput);
+view(suicideThoughtsInput);
+view(studyHoursInput);
+view(financialStressInput);
+view(familyHistory);
+view(realDepression);
+display(submitUserProfile);
+``` -->
+
 <!-- SLIDE 1:  -->
 <body>
 <div class="section active" id="section-0">
 <div class = "section-content">
+
 
 <div class="grid grid-cols-2">
 
