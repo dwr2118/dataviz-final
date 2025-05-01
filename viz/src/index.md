@@ -380,7 +380,7 @@ body{
 </div>
 
  <!-- ML Predictor Card -->
- <div class="section" id="section-8">
+ <div class="section active" id="section-8">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -398,7 +398,7 @@ body{
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container">
-    <p style="font-size: 16px;">Please note: This is not a medical diagnosis. It is a reflective resource designed to help you identify patterns in your lifestyle that may be associated with depression. If you or someone you know is struggling, we strongly encourage seeking professional support through counseling services or mental health resources.</p>
+    <p style="font-size: 16px;"> To use this tool: </p>
     <ul style="font-size: 16px;">
       <li>Review the information you’ve entered on previous pages, including your gender, age, study satisfaction, sleep and more.</li>
       <li>To provide a more accuracte prediction, we need more information on your dietary habits, whether you've had suicidal thoughts and familial history of mental illness; all of which can be entered below. </li>
