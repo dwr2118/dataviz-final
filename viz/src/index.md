@@ -28,11 +28,15 @@ body{
   font-family: var(--sans-serif);
   box-sizing: border-box;
   overflow: hidden; /* Prevent body-level scrolling */
-  background-color: navajowhite;
+  background-color: #e5e3e4;
 }
 
 h1, h2, h3, p, li {
   color: black;
+}
+
+p {
+  font-size: x-large;
 }
 
 .grid {
@@ -172,16 +176,15 @@ h1, h2, h3, p, li {
   <!-- Insight div -->
   <div class="card-borderless grid-rowspan-3">
     <h1>Explore how sleep, diet, study time, and more relate to Student Depression. </h1>
+      <!-- User Interaction Div -->
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3" style="padding-left:0px;">
+    <h1 style="font-size: 20px;">Click on each bubble to see details on each student data point. </h1>
+  </div>
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h2>Exploring the Data</h2>
     ${display(createChart())}
 
-  </div>
-  <!-- User Interaction Div -->
-  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
-    <h1 style="font-size: 15px;">Click on each bubble to see details on each student data point. </h1>
   </div>
 </div>
 </div>
@@ -221,7 +224,7 @@ h1, h2, h3, p, li {
 
 
 <!-- Feature Cards: Academic Pressure -->
-<div class="section" id="section-3">
+<div class="section active" id="section-3">
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
@@ -237,17 +240,17 @@ h1, h2, h3, p, li {
     <p>As academic pressure increases, we observe a clear uptick in reported depression levels. Students who rate their academic pressure between 3 and 5 show significantly higher rates of depression than those under less pressure.</p>
     
   </div>
-  <!-- Data div -->
-  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h1>Depression by Academic Pressure Levels</h1>
-    <div id="chart-container-academic">${view(startAcademic)} </div>
-
-  </div>
-  <!-- User Interaction Div -->
+    <!-- User Interaction Div -->
   <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your academic pressure on a scale from 1 to 5 </p>
     <p> ${view(academicPressureInput)}</p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Academic Pressure Levels</h1>
+    <div id="chart-container-academic">${view(startAcademic)} </div>
+
   </div>
 </div>
 
@@ -831,8 +834,7 @@ const chart = (category, startClick) => {
   // build the SVG
   const svg = d3.create("svg")
     .attr("width", width)
-    .attr("height", height)
-    .style("background-color", "navajowhite");
+    .attr("height", height);
 
   // your bins
   const leftBins = binSets[category];
