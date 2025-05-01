@@ -105,6 +105,18 @@ h1, h2, h3, p, li {
     line-height: 1.5; /* Match the line height for better readability */
     margin: 0.5rem 0; /* Add consistent spacing between lines */
 }
+
+.inputs-3a86ea textarea {
+  color: white; /* Override the color for textareas only */
+}
+
+.inputs-3a86ea input {
+  color: white; /* Override the color for input boxes only */
+}
+
+.inputs-3a86ea select {
+  color: white; /* Override the color for dropdowns only */
+}
 </style>
 
 <!-- SLIDE 1: Title landing page -->
@@ -217,7 +229,8 @@ h1, h2, h3, p, li {
   <div class="card-borderless grid-rowspan-3">
     <h1>Insight for this feature</h1>
     <h1></h1>
-    As academic pressure increases, we observe a clear uptick in reported depression levels. Students who rate their academic pressure between 3 and 5 show significantly higher rates of depression than those under less pressure.
+    <p>As academic pressure increases, we observe a clear uptick in reported depression levels. Students who rate their academic pressure between 3 and 5 show significantly higher rates of depression than those under less pressure.</p>
+    
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
@@ -229,7 +242,7 @@ h1, h2, h3, p, li {
   <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your academic pressure on a scale from 1 to 5 </p>
-    ${view(academicPressureInput)}
+    <p> ${view(academicPressureInput)}</p>
   </div>
 </div>
 
@@ -251,7 +264,7 @@ h1, h2, h3, p, li {
   <div class="card-borderless grid-rowspan-3">
     <h1>Insight for this feature</h1>
     <h1></h1>
-    While there isn't a strong correlation between sleep duration and depression, students who sleep fewer than 6 hours per night tend to report slightly higher levels of depression compared to their peers.
+    <p>While there isn't a strong correlation between sleep duration and depression, students who sleep fewer than 6 hours per night tend to report slightly higher levels of depression compared to their peers.</p>
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
@@ -263,7 +276,7 @@ h1, h2, h3, p, li {
   <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your sleep hours on a scale from 1 to 5 </p>
-    ${view(sleepInput)}
+    <p> ${view(sleepInput)}</p>
   </div>
 </div>
 
@@ -304,10 +317,10 @@ h1, h2, h3, p, li {
   <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your study satisfaction on a scale from 1 to 5 </p>
-    ${view(studySatisfactionInput)}
+    <p> ${view(studySatisfactionInput)} </p>
     <br><br><br><br>
     <p> Enter the amount of hours you typically study weekly </p>
-    ${view(studyHoursInput)}
+    <p> ${view(studyHoursInput)} </p>
   </div>
 </div>
 </div>
@@ -329,7 +342,7 @@ h1, h2, h3, p, li {
   <div class="card-borderless grid-rowspan-3">
     <h1>Insight for this feature</h1>
     <h1></h1>
-    Similar to academic pressure, higher financial stress is strongly linked to increased depression rates. Constant worry about finances, such as debt or instability, can lead to feelings of helplessness and anxiety, which negatively impact mental health and contribute to depression.
+    <p>Similar to academic pressure, higher financial stress is strongly linked to increased depression rates. Constant worry about finances, such as debt or instability, can lead to feelings of helplessness and anxiety, which negatively impact mental health and contribute to depression.</p>
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
@@ -342,7 +355,7 @@ h1, h2, h3, p, li {
   <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your financial stress on a scale from 1 to 5 </p>
-    ${view(financialStressInput)}
+    <p> ${view(financialStressInput)} </p>
   </div>
 </div>
 </div>
@@ -413,14 +426,14 @@ h1, h2, h3, p, li {
     ${view(ageInput)} -->
     <!-- ${view(studySatisfactionInput)}  -->
     <!-- ${view(sleepInput)} -->
-    ${view(dietInput)}
+    <p> ${view(dietInput)}
     <!-- ${view(academicPressureInput)} -->
     ${view(suicideThoughtsInput)}
     <!-- ${view(studyHoursInput)} -->
     <!-- ${view(financialStressInput)} -->
     ${view(familyHistory)}
     <br>
-    ${display(submitUserProfile)}
+    ${display(submitUserProfile)} </p>
     <div id="prediction-results" style="margin-top: 20px;">
       <!-- Results will be displayed here -->
     </div>
@@ -448,10 +461,10 @@ h1, h2, h3, p, li {
   <div class="large-data-card" id="chart-container">
   <br><h1>Links to Resources: </h1>
   <br><br>
-  <p>https://www.nimh.nih.gov/get-involved/digital-shareables/mental-health-resources-for-students-and-educators</p><br>
-  <p>https://www.mentalhealthfirstaid.org/mental-health-resources/</p><br>
-  <p>https://opa.hhs.gov/adolescent-health/mental-health-adolescents/mental-health-resources</p><br>
-  <p>https://mhanational.org/youth-mental-health/</p><br>
+  <p><a href="https://www.nimh.nih.gov/get-involved/digital-shareables/mental-health-resources-for-students-and-educators" target="_blank">https://www.nimh.nih.gov/get-involved/digital-shareables/mental-health-resources-for-students-and-educators</a></p><br>
+  <p><a href="https://www.mentalhealthfirstaid.org/mental-health-resources/" target="_blank">https://www.mentalhealthfirstaid.org/mental-health-resources/</a></p><br>
+  <p><a href="https://opa.hhs.gov/adolescent-health/mental-health-adolescents/mental-health-resources" target="_blank">https://opa.hhs.gov/adolescent-health/mental-health-adolescents/mental-health-resources</a></p><br>
+  <p><a href="https://mhanational.org/youth-mental-health/" target="_blank">https://mhanational.org/youth-mental-health/</a></p><br>
   </div>
 </div>
 </div>
