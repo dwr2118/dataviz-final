@@ -15,9 +15,6 @@ footer:
 }
 
 .large-data-card{
-    background: var(--theme-background-alt);
-    border: solid 1px var(--theme-foreground-faintest);
-    border-radius: 0.55rem;
     padding: 1.5rem;
     font: 14px var(--sans-serif);
     grid-row: span 6;
@@ -89,29 +86,38 @@ body{
     #scroll-up {
       top: 20px;
     }
-</style>
 
-```js
-let clicks = 3;
-```
+.card-borderless {
+    padding: 1rem;
+    margin: 1rem 0;
+    font: 14px var(--sans-serif);
+}
+
+#prediction-results p {
+    font-size: 16px; /* Match the font size of other paragraphs */
+    color: inherit;  /* Inherit the color from the parent container */
+    line-height: 1.5; /* Match the line height for better readability */
+    margin: 0.5rem 0; /* Add consistent spacing between lines */
+}
+</style>
 
 <!-- SLIDE 1:  -->
 <body>
-<div class="section active" id="section-0">
+<div class="section" id="section-0">
 <div class = "section-content">
 
 
 <div class="grid grid-cols-2">
 
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         Mapping Mental Health: Predicting Student Depression Risk
       </h1>
   </div>
 
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-3">
     <h1>Our interactive tool lets you explore which lifestyle factors impact depression among students - and see how your habits compare. </h1>
   </div>
 
@@ -123,7 +129,7 @@ let clicks = 3;
   </div>
 
   <!-- User Interaction Div -->
-  <div class="card grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Created by: </h1>
     <p>Srinidhi Jayaprakash, Diego Rivas Lazala, Molly Fei, Stephen Park </p>
   </div>
@@ -137,13 +143,13 @@ let clicks = 3;
 
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         What Does the Data Say?
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-3">
     <h1>Explore how sleep, diet, study time, and more relate to Student Depression. </h1>
   </div>
   <!-- Data div -->
@@ -153,7 +159,7 @@ let clicks = 3;
 
   </div>
   <!-- User Interaction Div -->
-  <div class="card grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Click on each bubble to see details on each student data point. </h1>
   </div>
 </div>
@@ -165,13 +171,13 @@ let clicks = 3;
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         What Does Your Age and Gender Say?
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-3">
     <h1>Insights</h1>
     <h1></h1>
     Younger students tend to report higher levels of depression, possibly due to transitional stress and academic pressure. Additionally, female and non-binary students show higher average depression scores compared to male students, reflecting broader mental health disparities across gender identities.
@@ -187,7 +193,7 @@ let clicks = 3;
 
   </div>
   <!-- User Interaction Div -->
-  <div class="card grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1><br><br>
     <p> Enter Your Age: ${view(ageInput)} </p> <br><br><br>
     <p> Enter Your Gender: ${view(genderInput)}</p>
@@ -202,13 +208,13 @@ let clicks = 3;
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         What Do Your Academic Pressure Levels Say?
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-3">
     <h1>Insight for this feature</h1>
     <h1></h1>
     As academic pressure increases, we observe a clear uptick in reported depression levels. Students who rate their academic pressure between 3 and 5 show significantly higher rates of depression than those under less pressure.
@@ -221,7 +227,7 @@ let clicks = 3;
 
   </div>
   <!-- User Interaction Div -->
-  <div class="card grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your academic pressure on a scale from 1 to 5 </p>
     ${view(academicPressureInput)}
@@ -237,13 +243,13 @@ let clicks = 3;
 
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         What Do Your Sleep Habits Say?
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-3">
     <h1>Insight for this feature</h1>
     <h1></h1>
     While there isn't a strong correlation between sleep duration and depression, students who sleep fewer than 6 hours per night tend to report slightly higher levels of depression compared to their peers.
@@ -256,7 +262,7 @@ let clicks = 3;
     
   </div>
   <!-- User Interaction Div -->
-  <div class="card grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your sleep hours on a scale from 1 to 5 </p>
     ${view(sleepInput)}
@@ -272,13 +278,13 @@ let clicks = 3;
 
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         What Do Your Study Habits and Study Hours Say?
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-3">
     <h1>Insights</h1>
     <br>
     Higher satisfaction with studying is linked to lower depression counts; higher study satisfaction can lead to better mental well-being by fostering a sense of accomplishment and reducing stress. <br><br>
@@ -294,7 +300,7 @@ let clicks = 3;
     
   </div>
   <!-- User Interaction Div -->
-  <div class="card grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your study satisfaction on a scale from 1 to 5 </p>
     ${view(studySatisfactionInput)}
@@ -313,13 +319,13 @@ let clicks = 3;
 
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         What Does Your Financial Stress Say?
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
+  <div class="card-borderless grid-rowspan-3">
     <h1>Insight for this feature</h1>
     <h1></h1>
     Similar to academic pressure, higher financial stress is strongly linked to increased depression rates. Constant worry about finances, such as debt or instability, can lead to feelings of helplessness and anxiety, which negatively impact mental health and contribute to depression.
@@ -332,7 +338,7 @@ let clicks = 3;
     
   </div>
   <!-- User Interaction Div -->
-  <div class="card grid-colspan-1 grid-rowspan-3">
+  <div class="card-borderless grid-colspan-1 grid-rowspan-3">
     <h1 style="font-size: 15px;">Curious where you fit in?</h1>
     <p> Rate your financial stress on a scale from 1 to 5 </p>
     ${view(financialStressInput)}
@@ -348,13 +354,13 @@ let clicks = 3;
 
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         Insights Summary from Lifestyle Factors
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3" style="grid-row: span 6;">
+  <div class="card-borderless grid-rowspan-3" style="grid-row: span 6;">
     <br><h1 style="font-size: 20px;">What patterns emerge when we compare student life habits with reported depression? Our data shows clear trends between specific stressors and mental health outcomes.?</h1>
     <h1></h1>
     <br><br>
@@ -373,19 +379,68 @@ let clicks = 3;
 </div>
 </div>
 
-  <!-- Insights Summary Card:  -->
+ <!-- ML Predictor Card -->
+ <div class="section" id="section-8">
+<div class = "section-content">
+
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        Can We Predict If You Are at Risk of Depression?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card-borderless grid-rowspan-3" style="grid-row: span 6;">
+    <h1 style="font-size: 20px;">This tool uses a machine learning model to analyze your lifestyle factors and predict whether you might be at a higher risk of depression. By considering inputs such as dietary habits, suicidal thoughts, family history of mental illness, and more, the model provides a personalized prediction based on your profile.</h1>
+    <br>
+    
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container">
+    <p style="font-size: 16px;">Please note: This is not a medical diagnosis. It is a reflective resource designed to help you identify patterns in your lifestyle that may be associated with depression. If you or someone you know is struggling, we strongly encourage seeking professional support through counseling services or mental health resources.</p>
+    <ul style="font-size: 16px;">
+      <li>Review the information you’ve entered on previous pages, including your gender, age, study satisfaction, sleep and more.</li>
+      <li>To provide a more accuracte prediction, we need more information on your dietary habits, whether you've had suicidal thoughts and familial history of mental illness; all of which can be entered below. </li>
+      <li>If you’re ready, press the <strong>"Get Prediction"</strong> button to see the prediction based on your profile.</li>
+      <li>The result will indicate whether the model predicts a higher or lower risk of depression, along with the confidence level of the prediction.</li>
+    </ul>
+    <br>
+      <!-- TODO: allow the user to see what they have entered before hand -->
+    <!-- input from previous pages: gender, age-->
+    <!-- ${view(genderInput)}
+    ${view(ageInput)} -->
+    <!-- ${view(studySatisfactionInput)}  -->
+    <!-- ${view(sleepInput)} -->
+    ${view(dietInput)}
+    <!-- ${view(academicPressureInput)} -->
+    ${view(suicideThoughtsInput)}
+    <!-- ${view(studyHoursInput)} -->
+    <!-- ${view(financialStressInput)} -->
+    ${view(familyHistory)}
+    <br>
+    ${display(submitUserProfile)}
+    <div id="prediction-results" style="margin-top: 20px;">
+      <!-- Results will be displayed here -->
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+  <!-- Mental Health Resources  Card -->
 <div class="section" id="section-8">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
-  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+  <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
         Mental Health Matters
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3" style="grid-row: span 6;">
+  <div class="card-borderless grid-rowspan-3" style="grid-row: span 6;">
     <br><h1 style="font-size: 20px;">This machine learning tool is not a medical diagnosis but a reflective resource to help identify patterns in student life related to depression. If you or someone you know is struggling, we strongly encourage seeking support through university counseling services or national mental health resources.</h1>
   </div>
   <!-- Data div -->
@@ -400,43 +455,6 @@ let clicks = 3;
 </div>
 </div>
 </div>
-
-
-```js 
-/*
-// animating the pages upon scrolling
-const featureCards = document.querySelectorAll(".section");
-
-const animateOnScroll = () => {
-  featureCards.forEach((card) => {
-    const rect = card.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      card.classList.add("animate");
-    } else {
-      card.classList.remove("animate");
-    }
-  });
-};
-
-const animateOnKeyPress = (event) => {
-  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-    featureCards.forEach((card) => {
-      const rect = card.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        card.classList.add("animate");
-      } else {
-        card.classList.remove("animate");
-      }
-    });
-  }
-};
-
-window.addEventListener("scroll", animateOnScroll);
-window.addEventListener("keydown", animateOnKeyPress);
-
-featureCards;
-*/
-```
 
 <!-- loading chart data-->
 ```js
@@ -608,7 +626,7 @@ let accuracy = null;
 
 // send the user's profile to be processed by the backend Flask server
 // where the classifier model lives 
-let submitUserProfile = Inputs.button("Submit Entry", 
+let submitUserProfile = Inputs.button("Get Prediction", 
   {value: null, 
    reduce: async () => { // Make the reduce function async
      updateUserProfile();
@@ -624,21 +642,33 @@ let submitUserProfile = Inputs.button("Submit Entry",
        // Log the response status
        console.log("Response Status:", response.status);
 
-       // Optionally, parse the response JSON if needed
+       // Parse the response JSON
        const result = await response.json();
        console.log("Response Body:", result); 
 
-       // Update predictedDepression based on the response
+       // Update predictedDepression and accuracy
        predictedDepression = result["prediction"];
        accuracy = result["probability"][0][predictedDepression];
        console.log("Predicted Depression: ", predictedDepression, " with accuracy: ", accuracy);
+
+       // Update the HTML content of the #prediction-results div
+       const resultsDiv = document.getElementById("prediction-results");
+       resultsDiv.innerHTML = `
+         <p><strong>Prediction:</strong> ${predictedDepression === 1 ? "Higher Risk of Depression" : "Lower Risk of Depression"}</p>
+         <p><strong>Confidence:</strong> ${(accuracy * 100).toFixed(2)}%</p>
+       `;
      } catch (error) {
        console.error("Error during fetch:", error);
+
+       // Display an error message in the #prediction-results div
+       const resultsDiv = document.getElementById("prediction-results");
+       resultsDiv.innerHTML = `
+         <p style="color: red;"><strong>Error:</strong> Unable to fetch prediction. Please try again later.</p>
+       `;
      }
 
      return true;
-   },
-   label: "Are you ready to see yourself in the data?"
+   }
   });
 ```
 
@@ -761,7 +791,6 @@ function dataByCat(category) {
   });
 }
 ```
-
 
 ```js
 // animated chart source 
