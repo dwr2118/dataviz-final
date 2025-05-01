@@ -19,6 +19,7 @@ footer:
     font: 14px var(--sans-serif);
     grid-row: span 4;
     grid-column span 2;
+
 }
 
 body{
@@ -168,7 +169,6 @@ p {
 <!-- SLIDE 2: What does the data say? -->
 <div class="section" id="section-1">
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -330,7 +330,6 @@ p {
     <p> Enter the amount of hours you typically study weekly </p>
     <p> ${view(studyHoursInput)} </p>
   </div>
-
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Study Satisfaction Levels</h1>
