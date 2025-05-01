@@ -130,7 +130,7 @@ h1, h2, h3, p, li {
 <!-- SLIDE 1: Title landing page -->
 <body>
 
-<div class="section active" id="section-0">
+<div class="section" id="section-0">
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
