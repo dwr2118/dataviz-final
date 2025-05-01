@@ -24,6 +24,7 @@ body{
   margin: 0;
   padding: 0.1rem; /* More space between body edge and .section blocks */
   max-width: 100vw;
+  height: 100vh;
   font-family: var(--sans-serif);
   box-sizing: border-box;
   overflow: hidden; /* Prevent body-level scrolling */
@@ -32,6 +33,13 @@ body{
 
 h1, h2, h3, p, li {
   color: black;
+}
+
+.grid {
+  margin: 1rem 0;
+  display: grid;
+  gap: 1rem;
+  grid-auto-rows: unset;
 }
 
 .section {
