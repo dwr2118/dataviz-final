@@ -32,13 +32,11 @@ You have clicked ${clicks} times
     padding: 1.5rem;
     font: 14px var(--sans-serif);
     grid-row: span 6;
-    background: linear-gradient(135deg, #F7f7F7, #F7F7F7); /* pinkish gradient */
 }
 
 body{
   margin: 0;
   padding: 0.1rem; /* More space between body edge and .section blocks */
-  background: linear-gradient(135deg, #E5E3E4, #E5E3E4); /* pinkish gradient */
   max-width: 100vw;
   font-family: var(--sans-serif);
   box-sizing: border-box;
@@ -287,7 +285,6 @@ function createChart(){
     <p>Srinidhi Jayaprakash, Diego Rivas Lazala, Molly Fei, Stephen Park </p>
   </div>
 </div>
-
 </div>
 </div>
 
@@ -317,7 +314,6 @@ function createChart(){
     <h1 style="font-size: 15px;">Click on each bubble to see details on each student data point. </h1>
   </div>
 </div>
-
 </div>
 </div>
 
@@ -328,7 +324,42 @@ function createChart(){
   <!-- Page Title div -->
   <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
-        What Do Your Acadenmic Pressure Levels Say?
+        What Does Your Age and Gender Say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1>Insights</h1>
+    <h1></h1>
+    Younger students tend to report higher levels of depression, possibly due to transitional stress and academic pressure. Additionally, female and non-binary students show higher average depression scores compared to male students, reflecting broader mental health disparities across gender identities.
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression by Age</h1><br><br>
+    *****INSERT CHART HERE*****
+    <h1>Depression by Gender</h1>
+    *****INSERT CHART HERE*****
+
+  </div>
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1><br><br>
+    <p> Enter Your Gender: </p> <br><br><br>
+    <p> Enter Your Gender: </p>
+  </div>
+</div>
+</div>
+</div>
+
+
+<!-- Feature Cards:  -->
+<div class="section" id="section-3">
+<div class = "section-content">
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What Do Your Academic Pressure Levels Say?
       </h1>
   </div>
   <!-- Insight div -->
@@ -354,7 +385,7 @@ function createChart(){
 </div>
 
 <!-- Feature Cards:  -->
-<div class="section" id="section-3">
+<div class="section" id="section-4">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -387,7 +418,7 @@ function createChart(){
 </div>
 
 <!-- Feature Cards:  -->
-<div class="section" id="section-4">
+<div class="section" id="section-5">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -420,13 +451,44 @@ function createChart(){
     <p> Rate your study satisfaction on a scale from 1 to 5 </p>
   </div>
 </div>
-
 </div>
 </div>
 
+<!-- Insights Summary Card:  -->
+<div class="section" id="section-6">
+<div class = "section-content">
+
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What do Your Dietary Habits say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1 style="font-size: 17px;">Insight</h1>
+    <h1></h1>
+    <p>Similar to study habits, worse dietary habits are correlated with increased depression rates. Worse dietary habits can have a negative impact on physical and mental health generally, and may also be an indication of financial stress.</p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Depression and Dietary Habits Chart</h1>
+    <img src="image.png" width="620" height="410" /> 
+  </div>
+
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p> Rate your dietary habits on a scale from 1 to 5 </p>
+  </div>
+</div>
+
+</div>
+</div>
 
 <!-- Feature Cards:  -->
-<div class="section" id="section-5">
+<div class="section" id="section-7">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -454,13 +516,12 @@ function createChart(){
     <p> Rate your financial stress on a scale from 1 to 5 </p>
   </div>
 </div>
-
 </div>
 </div>
 
 
 <!-- Insights Summary Card:  -->
-<div class="section" id="section-6">
+<div class="section" id="section-8">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -471,24 +532,91 @@ function createChart(){
       </h1>
   </div>
   <!-- Insight div -->
-  <div class="card grid-rowspan-3">
-    <h1 style="font-size: 17px;">What patterns emerge when we compare student life habits with reported depression? Our data shows clear trends between specific stressors and mental health outcomes.?</h1>
+  <div class="card grid-rowspan-3" style="grid-row: span 6;">
+    <br><h1 style="font-size: 20px;">What patterns emerge when we compare student life habits with reported depression? Our data shows clear trends between specific stressors and mental health outcomes.?</h1>
     <h1></h1>
-    <p>Academic Pressure: As academic pressure increases, the count of students with depression also increases.<br><br>
-    Financial Stress: Similar to academic pressure, higher financial stress is strongly associated with higher depression rates.<br><br>
-    Study Satisfaction: Higher satisfaction with studying is linked to lower depression counts.<br><br>
-    Study Hours: More study hours tend to correlate with higher depression, possibly pointing to overwork or burnout.<br><br>
-    Sleep Duration: Students sleeping less than 6 hours have a slightly higher count of depression, although not a significant difference.</p>
+    <br><br>
+    <p style="font-size: 18px;">Financial Stress: Similar to academic pressure, higher financial stress is strongly associated with higher depression rates.<br><br><br>
+    Study Satisfaction: Higher satisfaction with studying is linked to lower depression counts.<br><br><br>
+    Academic Pressure: As academic pressure increases, the count of students with depression also increases.<br><br><br>
+    Study Hours: More study hours tend to correlate with higher depression, possibly pointing to overwork or burnout.<br><br><br>
+    Sleep Duration: Students sleeping less than 6 hours have a slightly higher count of depression, although not a significant difference.<br><br><br>
+    Dietary Habits: Poorer dietary habits are more prevalent among depressed students.
+    </p>
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <h1>Trend Highlights</h1>
+    <h1>Depression by Financial Stress Levels</h1>
+    <img src="image.png" width="700" height="450" />
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Insights Summary Card:  -->
+<div class="section" id="section-9">
+<div class = "section-content">
+
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        What does your Personal and Family History with Depression say?
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3">
+    <h1 style="font-size: 17px;">Insight</h1>
+    <h1></h1>
+    <p>Depression rates are noticably higher among students who have a family history of a depression or who have had suicidal thoughts themselves. Both of these may be correlated with genetic or social predispositions to depression.</p>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
+    <h1>Family History of Depression Chart</h1>
     <img src="image.png" width="620" height="410" /> 
+  </div>
+
+  <!-- User Interaction Div -->
+  <div class="card grid-colspan-1 grid-rowspan-3">
+    <h1 style="font-size: 15px;">Curious where you fit in?</h1>
+    <p>Have you ever had suicidal thoughts?</pr>
+    <br><br><br><br>
+    <p>Do you have a family history of depression?</pr>
+    </p>
   </div>
 </div>
 
 </div>
 </div>
+
+  <!-- Insights Summary Card:  -->
+<div class="section" id="section-10">
+<div class = "section-content">
+
+<div class="grid grid-cols-2">
+  <!-- Page Title div -->
+  <div class="card grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+      <h1 class="no-max-width">
+        Mental Health Matters
+      </h1>
+  </div>
+  <!-- Insight div -->
+  <div class="card grid-rowspan-3" style="grid-row: span 6;">
+    <br><h1 style="font-size: 20px;">This machine learning tool is not a medical diagnosis but a reflective resource to help identify patterns in student life related to depression. If you or someone you know is struggling, we strongly encourage seeking support through university counseling services or national mental health resources.</h1>
+  </div>
+  <!-- Data div -->
+  <div class="large-data-card" id="chart-container">
+  <br><h1>Links to Resources: </h1>
+  <br><br>
+  <p>https://www.nimh.nih.gov/get-involved/digital-shareables/mental-health-resources-for-students-and-educators</p><br>
+  <p>https://www.mentalhealthfirstaid.org/mental-health-resources/</p><br>
+  <p>https://opa.hhs.gov/adolescent-health/mental-health-adolescents/mental-health-resources</p><br>
+  <p>https://mhanational.org/youth-mental-health/</p><br>
+  </div>
+</div>
+</div>
+</div>
+
 
 <button id="scroll-up" class="scroll-button hidden" onclick="scrollToPrevious()">↑ Up</button>
 <button id="scroll-down" class="scroll-button" onclick="scrollToNext()">↓ Down</button>
@@ -498,21 +626,16 @@ function createChart(){
     const btnDown = document.getElementById('scroll-down');
     let currentIndex = 0;
     let isTransitioning = false;
-
     function updateButtons() {
       btnUp.classList.toggle('hidden', currentIndex === 0);
       btnDown.classList.toggle('hidden', currentIndex === sections.length - 1);
     }
-
     function transitionToSection(index) {
       if (isTransitioning || index === currentIndex || index < 0 || index >= sections.length) return;
       isTransitioning = true;
-
       const current = sections[currentIndex];
       const next = sections[index];
-
       current.classList.remove('active');
-
       // Wait for fade out, then show new section
       setTimeout(() => {
         next.scrollTop = 0; // Reset scroll position
@@ -522,15 +645,12 @@ function createChart(){
         isTransitioning = false;
       }, 250); // Must match CSS transition time
     }
-
     function scrollToNext() {
       transitionToSection(currentIndex + 1);
     }
-
     function scrollToPrevious() {
       transitionToSection(currentIndex - 1);
     }
-
     // Prevent manual section switching
     window.addEventListener('keydown', e => {
       const keys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' '];
@@ -538,7 +658,6 @@ function createChart(){
         e.preventDefault();
       }
     });
-
     updateButtons();
 </script>
 </body>
