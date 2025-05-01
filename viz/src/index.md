@@ -27,7 +27,13 @@ body{
   font-family: var(--sans-serif);
   box-sizing: border-box;
   overflow: hidden; /* Prevent body-level scrolling */
+  background-color: navajowhite;
 }
+
+h1, h2, h3, p, li {
+  color: black;
+}
+
 .section {
   position: absolute;
   width: 100%; /* Full width of the viewport */
@@ -104,7 +110,7 @@ body{
 <!-- SLIDE 1: Title landing page -->
 <body>
 
-<div class="section" id="section-0">
+<div class="section active" id="section-0">
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
@@ -178,7 +184,7 @@ body{
   <div class="card-borderless grid-rowspan-3">
     <h1>Insights</h1>
     <h1></h1>
-    Younger students tend to report higher levels of depression, possibly due to transitional stress and academic pressure. Additionally, female and non-binary students show higher average depression scores compared to male students, reflecting broader mental health disparities across gender identities.
+    <p>Younger students tend to report higher levels of depression, possibly due to transitional stress and academic pressure. Additionally, female and non-binary students show higher average depression scores compared to male students, reflecting broader mental health disparities across gender identities.</p>
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
@@ -279,8 +285,11 @@ body{
   <div class="card-borderless grid-rowspan-3">
     <h1>Insights</h1>
     <br>
+    <p>
     Higher satisfaction with studying is linked to lower depression counts; higher study satisfaction can lead to better mental well-being by fostering a sense of accomplishment and reducing stress. <br><br>
     Increased study hours often correlate with higher levels of depression, suggesting that overworking can lead to burnout. 
+    </p>
+    
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
@@ -804,7 +813,8 @@ const chart = (category, startClick) => {
   // build the SVG
   const svg = d3.create("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .style("background-color", "navajowhite");
 
   // your bins
   const leftBins = binSets[category];
