@@ -101,14 +101,12 @@ body{
 }
 </style>
 
-<!-- SLIDE 1:  -->
+<!-- SLIDE 1: Title landing page -->
 <body>
+
 <div class="section" id="section-0">
 <div class = "section-content">
-
-
 <div class="grid grid-cols-2">
-
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
@@ -137,7 +135,7 @@ body{
 </div>
 </div>
 
-<!-- SLIDE 2:  -->
+<!-- SLIDE 2: What does the data say? -->
 <div class="section" id="section-1">
 <div class = "section-content">
 
@@ -166,7 +164,7 @@ body{
 </div>
 </div>
 
-<!-- Feature Cards:  -->
+<!-- Feature Cards: Age and Gender -->
 <div class="section" id="section-2">
 <div class = "section-content">
 <div class="grid grid-cols-2">
@@ -184,8 +182,8 @@ body{
   </div>
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
-    <div id="chart-container-age"><h1>Depression by Age</h1><br><br> ${view(startAge)} </div>
-    <div id="chart-container-gender"><h1>Depression by Gender</h1> ${view(startGender)}</div>
+    <h1>Depression by Age</h1><br><br> <div id="chart-container-age"> ${view(startAge)} </div>
+    <h1>Depression by Gender</h1> <div id="chart-container-gender"> ${view(startGender)} </div>
 
   </div>
   <!-- User Interaction Div -->
@@ -199,7 +197,7 @@ body{
 </div>
 
 
-<!-- Feature Cards:  -->
+<!-- Feature Cards: Academic Pressure -->
 <div class="section" id="section-3">
 <div class = "section-content">
 <div class="grid grid-cols-2">
@@ -218,8 +216,7 @@ body{
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Academic Pressure Levels</h1>
-    ${view(startAcademic)}
-    ${view(chart("Academic Pressure",startAcademic))}
+    <div id="chart-container-academic">${view(startAcademic)} </div>
 
   </div>
   <!-- User Interaction Div -->
@@ -233,7 +230,7 @@ body{
 </div>
 </div>
 
-<!-- Feature Cards:  -->
+<!-- Feature Cards: Sleep Habits -->
 <div class="section" id="section-4">
 <div class = "section-content">
 
@@ -253,7 +250,7 @@ body{
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Number of Sleep Hours</h1>
-    ${view(startSleep)}
+    <div id="chart-container-sleep"> ${view(startSleep)} </div>
     
   </div>
   <!-- User Interaction Div -->
@@ -267,7 +264,7 @@ body{
 </div>
 </div>
 
-<!-- Feature Cards:  -->
+<!-- Feature Cards: Study Habits and Study Hours -->
 <div class="section" id="section-5">
 <div class = "section-content">
 
@@ -288,8 +285,8 @@ body{
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Study Satisfaction Levels</h1>
-    ${view(startSatisfaction)}
-    ${view(chart("Study Satisfaction",startSatisfaction))}
+    <div id="chart-container-satis"> ${view(startSatisfaction)}</div>
+    
     <h1>Depression by Study Hour Levels</h1>
     <!********NEED A STUDY HOUR VIZ HERE*********!>
     
@@ -308,7 +305,7 @@ body{
 </div>
 
 
-<!-- Feature Cards:  -->
+<!-- Feature Cards: Financial Stress -->
 <div class="section" id="section-6">
 <div class = "section-content">
 
@@ -328,8 +325,8 @@ body{
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="display: flex; justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Financial Stress Levels</h1>
-    ${view(startFinancialStress)}
-    ${view(chart("Financial Stress",startFinancialStress))}
+    <div id="chart-container-finance"> ${view(startFinancialStress)}</div>
+    
     
   </div>
   <!-- User Interaction Div -->
@@ -375,7 +372,7 @@ body{
 </div>
 
  <!-- ML Predictor Card -->
- <div class="section" id="section-8">
+<div class="section" id="section-8">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -1024,54 +1021,80 @@ const chart = (category, startClick) => {
 ```
 
 ```js
-// TODO: add this to all animations, fix chart styling and text styling to make it look neat
+// TODO: animations can only play once right now, fix chart styling and text styling to make it look neat
 // and record video 
 // animation button definitions 
-const startSleep          = Inputs.button("Start Sleep Duration");
-const startAcademic       = Inputs.button("Start Academic Pressure");
-const startSatisfaction   = Inputs.button("Start Study Satisfaction");
-const startDietary        = Inputs.button("Start Dietary Habits");
+const startSleep          = Inputs.button("Start Sleep Duration", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-sleep");
+    container.innerHTML = "";
+    let sleepChart = chart("Sleep Duration", startSleep);
+    container.appendChild(sleepChart); // Render the chart
+  }
+});
+
+const startAcademic       = Inputs.button("Start Academic Pressure", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-academic");
+    container.innerHTML = "";
+    let academicChart = chart("Academic Pressure", startAcademic);
+    container.appendChild(academicChart); // Render the chart
+  }
+});
+
+const startSatisfaction   = Inputs.button("Start Study Satisfaction", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-satis");
+    container.innerHTML = "";
+    let satisChart = chart("Study Satisfaction", startSatisfaction);
+    container.appendChild(satisChart); // Render the chart
+  }
+});
+
+const startDietary        = Inputs.button("Start Dietary Habits", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-diet");
+    container.innerHTML = "";
+    let Chart = chart("Dietary Habits", startDietary);
+    container.appendChild(Chart); // Render the chart
+  }
+});
 
 const startAge = Inputs.button("Start Age", {
   reduce: () => {
     const container = document.getElementById("chart-container-age");
-    container.innerHTML = ""; // Clear any existing chart
+    container.innerHTML = "";
     let ageChart = chart("Age", startAge);
     container.appendChild(ageChart); // Render the chart
   }
 });
 
-// chart-container-gender
-
 const startGender         = Inputs.button("Start Gender", {
   reduce: () => {
     const container = document.getElementById("chart-container-gender");
-    container.innerHTML = ""; // Clear any existing chart
+    container.innerHTML = "";
     let genderChart = chart("Gender", startGender);
     container.appendChild(genderChart); // Render the chart
   }
 });
 
-
-const startFamilyHistory  = Inputs.button("Start Family History"); 
-const startFinancialStress = Inputs.button("Start Financial Stress"); 
+const startFamilyHistory  = Inputs.button("Start Family History", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-family");
+    container.innerHTML = "";
+    let Chart = chart("Family History of Mental Illness", startFamilyHistory);
+    container.appendChild(Chart); // Render the chart
+  }
+});
+const startFinancialStress = Inputs.button("Start Financial Stress", {
+  reduce: () => {
+    const container = document.getElementById("chart-container-finance");
+    container.innerHTML = "";
+    let Chart = chart("Financial Stress", startFinancialStress);
+    container.appendChild(Chart); // Render the chart
+  }
+});
 ```
-
-<!-- This is how you view the input interactions-->
-<!-- ```js
-view(genderInput);
-view(ageInput); 
-view(studySatisfactionInput); 
-view(sleepInput);
-view(dietInput);
-view(academicPressureInput);
-view(suicideThoughtsInput);
-view(studyHoursInput);
-view(financialStressInput);
-view(familyHistory);
-view(realDepression);
-display(submitUserProfile);
-``` -->
 
 <button id="scroll-up" class="scroll-button hidden" onclick="scrollToPrevious()">↑</button>
 <button id="scroll-down" class="scroll-button" onclick="scrollToNext()">↓</button>
