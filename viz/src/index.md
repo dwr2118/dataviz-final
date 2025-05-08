@@ -824,38 +824,64 @@ function dataByCat(category) {
 // animated chart source 
 const chart = (category, startClick) => {
   // ─ layout ──────────────────────────────────────────────────────
-  const width   = 1300;
-  const height  = 500;
-  const margin  = { top: 80, left: 170, right: 700, bottom: 20 };
-  const x0      = margin.left;
-  const x1      = width - margin.right - 20;  // 1300 - 700 - 20 = 580
-  const dotSize = 6, gap = 8, dotsPerRow = 20;
+  const width        = 1300;
+  const height       = 500;
+  const margin       = { top: 80, left: 170, right: 700, bottom: 20 };
+  const x0           = margin.left;
+  const x1           = width - margin.right - 20; // 580
+  const dotSize      = 6;
+  const gap          = 8;
+  const dotsPerRow   = 20;
+  const spacing      = 90; // controls max bar width
 
   // helper to turn any string into a valid CSS class
   const sanitize = s => s.replace(/\W+/g, "_");
 
-  // pull in your pre-binning function
-  const _data = dataByCat(category);
+  // load & group data
+  const _data        = dataByCat(category);
+  const leftBins     = binSets[category];
+  const rightBins    = ["No", "Yes"];
+  const grouped      = d3.group(_data, d => d.cat);
+  const depGrouped   = d3.group(_data, d => d.depression);
 
-  // build the SVG
+  // ─ adaptive color scale ─────────────────────────────────────────
+  const seqSchemes = {
+    "Academic Pressure":   t => d3.interpolateBlues(0.3 + 0.7 * t),
+    "Sleep Duration":      t => d3.interpolateGreens(0.3 + 0.7 * t),
+    "Financial Stress":    t => d3.interpolateReds(0.3 + 0.7 * t),
+    "Study Satisfaction":  t => d3.interpolatePurples(0.3 + 0.7 * t),
+    "Dietary Habits":      t => d3.interpolateOranges(0.3 + 0.7 * t),
+    "Age":                 t => d3.interpolateRgb("#ffe6f0", "#c70067")(0.1 + 0.7 * t)
+  };
+  const catCategories = ["Gender", "Family History"];
+
+  let color;
+  if (seqSchemes[category]) {
+    // sequential palette for the six metrics
+    const interp = seqSchemes[category];
+    color = d3.scaleOrdinal()
+      .domain(leftBins)
+      .range(leftBins.map((_, i) =>
+        interp(i / (leftBins.length - 1))
+      ));
+  } else if (catCategories.includes(category)) {
+    // categorical palette for Gender & Family History
+    color = d3.scaleOrdinal()
+      .domain(leftBins)
+      .range(d3.schemeSet2.slice(0, leftBins.length));
+  } else {
+    // fallback
+    color = d3.scaleOrdinal()
+      .domain(leftBins)
+      .range(d3.schemeCategory10.slice(0, leftBins.length));
+  }
+
+  // ─ build SVG ─────────────────────────────────────────────────────
   const svg = d3.create("svg")
     .attr("width", width)
     .attr("height", height);
 
-  // your bins
-  const leftBins = binSets[category];
-  const rightBins = ["No","Yes"];
-
-  // group by category & depression
-  const grouped           = d3.group(_data, d => d.cat);
-  const depressionGrouped = d3.group(_data, d => d.depression);
-
-  // a color scale for your left-side bins
-  const color = d3.scaleOrdinal()
-    .domain(leftBins)
-    .range(d3.schemeCategory10.slice(0, leftBins.length));
-
-  // vertical positioning
+  // ─ scales ────────────────────────────────────────────────────────
   const yLeft = d3.scaleBand()
     .domain(leftBins)
     .range([margin.top, height - margin.bottom])
@@ -866,62 +892,58 @@ const chart = (category, startClick) => {
     .range([margin.top, height - margin.bottom])
     .padding(0.5);
 
-  // title centered above
+  // ─ title & legend ───────────────────────────────────────────────
   svg.append("text")
     .attr("x", width/2).attr("y", 40)
     .attr("text-anchor","middle")
-    .style("font-size","20px")
-    .style("font-weight","bold")
+    .style("font-size","20px").style("font-weight","bold")
     .text(category);
 
-  // legend for leftBins
   const legend = svg.append("g")
     .attr("transform", `translate(${width/2 - leftBins.length*40},60)`);
   legend.selectAll("g")
     .data(leftBins)
     .join("g")
       .attr("transform", (_,i) => `translate(${i*80},0)`)
-    .call(g => {
-      g.append("rect")
-        .attr("width",12).attr("height",12)
-        .attr("fill", d => color(d));
-      g.append("text")
-        .attr("x",16).attr("y",10)
-        .style("font-size","13px")
-        .text(d => d);
-    });
+      .call(g => {
+        g.append("rect")
+          .attr("width",12).attr("height",12)
+          .attr("fill", d => color(d));
+        g.append("text")
+          .attr("x",16).attr("y",10)
+          .style("font-size","13px")
+          .text(d => d);
+      });
 
-  // left labels + student counts
+  // ─ left labels & counts ────────────────────────────────────────
   leftBins.forEach(bin => {
     const total = grouped.get(bin).length;
     svg.append("text")
-      .attr("x", x0 - 8)          // just left of the dots
+      .attr("x", x0 - 8)
       .attr("y", yLeft(bin) - 10)
-      .attr("dy","0.32em")
-      .attr("text-anchor","end")
-      .style("font-size","14px")
+      .attr("dy", "0.32em")
+      .attr("text-anchor", "end")
+      .style("font-size", "14px")
       .text(`${bin}: ${total} students`);
   });
 
-  // compute each dot’s start position
+  // ─ compute start/end positions ──────────────────────────────────
   const leftDots = _data.map(d => {
     const arr = grouped.get(d.cat);
     const idx = arr.findIndex(x => x.id === d.id);
     const row = Math.floor(idx / dotsPerRow);
     const col = idx % dotsPerRow;
-    return {
-      ...d,
+    return { ...d,
       x0: x0 - col * gap,
       y0: yLeft(d.cat) + row * gap
     };
   });
 
-  // compute each dot’s end position
   const rightData = [];
-  const offsets = { No: {}, Yes: {} };
-  leftBins.forEach(b => offsets.No[b] = offsets.Yes[b] = 0);
+  const offsets   = { No: {}, Yes: {} };
+  leftBins.forEach(b => { offsets.No[b] = offsets.Yes[b] = 0; });
   rightBins.forEach(bin => {
-    const arr = depressionGrouped.get(bin) || [];
+    const arr = depGrouped.get(bin) || [];
     const sec = d3.group(arr, d => d.cat);
     leftBins.forEach(cat => {
       (sec.get(cat) || []).forEach(d => {
@@ -929,23 +951,23 @@ const chart = (category, startClick) => {
         const row = Math.floor(idx / dotsPerRow);
         const col = idx % dotsPerRow;
         rightData.push({
-          id: d.id,
-          cat: d.cat,
+          id:         d.id,
+          cat:        d.cat,
           depression: bin,
-          x1: x1 + col * gap,
-          y1: yRight(bin) + row * gap
+          x1:         x1 + col * gap,
+          y1:         yRight(bin) + row * gap
         });
       });
     });
   });
 
-  // total counts per depression bin
+  // ─ total counts per depression bin ─────────────────────────────
   const totalByBin = {
     No:  rightData.filter(r => r.depression === "No").length,
     Yes: rightData.filter(r => r.depression === "Yes").length
   };
 
-  // draw the grey flow paths
+  // ─ draw flow paths ──────────────────────────────────────────────
   const flows = d3.group(rightData, r => `${r.cat}--${r.depression}`);
   flows.forEach((_, key) => {
     const [cat, bin] = key.split("--");
@@ -964,66 +986,66 @@ const chart = (category, startClick) => {
       .attr("opacity", 0.5);
   });
 
-  // right‐side labels
+  // ─ right‐side labels ─────────────────────────────────────────────
   svg.append("text")
-    .attr("x", x1)
-    .attr("y", yRight("No") - 20)
-    .attr("text-anchor","middle")
-    .style("font-weight","bold")
+    .attr("x", x1).attr("y", yRight("No") - 20)
+    .attr("text-anchor","middle").style("font-weight","bold")
     .text("No Depression");
 
   svg.append("text")
-    .attr("x", x1)
-    .attr("y", yRight("Yes") - 20)
-    .attr("text-anchor","middle")
-    .style("font-weight","bold")
+    .attr("x", x1).attr("y", yRight("Yes") - 20)
+    .attr("text-anchor","middle").style("font-weight","bold")
     .text("Depression");
 
-  // percentage title above circles
+  // ─ percent title ────────────────────────────────────────────────
   svg.append("text")
-    .attr("x", 750)
-    .attr("y", margin.top + 40)
+    .attr("x", 750).attr("y", margin.top + 40)
     .attr("text-anchor","middle")
     .style("font-size","14px").style("font-weight","bold")
     .text("Percentage of Each Section");
 
-  // prepare circle placeholders & counts
-  const counts = { No: {}, Yes: {} };
-  leftBins.forEach(b => counts.No[b] = counts.Yes[b] = 0);
+  // ─ prepare stacked‐bars & labels ───────────────────────────────
+  const counts    = { No: {}, Yes: {} };
+  leftBins.forEach(b => { counts.No[b] = counts.Yes[b] = 0; });
 
-  const Cg = svg.append("g");
-  const spacing = 90;
+  const barHeight   = yRight.bandwidth() / 2;
+  const barMaxWidth = spacing * leftBins.length;
+  const Cg          = svg.append("g");
+  const barGroups   = {};
+
   rightBins.forEach(bin => {
-    leftBins.forEach((cat, i) => {
-      const cls = `${sanitize(bin)}__${sanitize(cat)}`;
-      Cg.append("circle")
-        .attr("class", cls)
-        .attr("cx", x1 + 100 + i*spacing)
-        .attr("cy", yRight(bin) + yRight.bandwidth()/2)
-        .attr("r", 0)
+    const g = Cg.append("g")
+      .attr("class", `barGroup ${sanitize(bin)}`)
+      .attr("transform", `translate(${x1 + 100}, ${yRight(bin) + yRight.bandwidth()/2 - barHeight/2})`);
+    barGroups[bin] = g;
+
+    leftBins.forEach(cat => {
+      g.append("rect")
+        .attr("class", `${sanitize(bin)}__${sanitize(cat)}`)
+        .attr("x", 0).attr("y", 0)
+        .attr("width", 0).attr("height", barHeight)
         .attr("fill", color(cat));
-      Cg.append("text")
-        .attr("class", cls + "__label")
-        .attr("x", x1 + 100 + i*spacing)
-        .attr("y", yRight(bin) + yRight.bandwidth()/2 + 4)
-        .attr("text-anchor","middle")
-        .style("fill","#fff")
-        .style("font-size","14px")
-        .text("")
-        .attr("opacity",0);
+
+      g.append("text")
+        .attr("class", `${sanitize(bin)}__${sanitize(cat)}__label`)
+        .attr("x", 0)
+        .attr("y", barHeight/2 + 4)
+        .attr("text-anchor", "middle")
+        .style("fill", "#fff")
+        .style("font-size", "12px")
+        .attr("opacity", 0)
+        .text("");
     });
   });
 
-  // draw & animate each dot along its path
+  // ─ draw & animate dots along paths ─────────────────────────────
   const dots = svg.append("g")
     .selectAll("rect")
     .data(leftDots)
     .join("rect")
-      .attr("width", dotSize)
-      .attr("height", dotSize)
+      .attr("width", dotSize).attr("height", dotSize)
       .attr("fill", d => color(d.cat))
-      .attr("x", d => d.x0)
-      .attr("y", d => d.y0);
+      .attr("x", d => d.x0).attr("y", d => d.y0);
 
   dots.each(function(d, i) {
     const tgt    = rightData.find(r => r.id === d.id),
@@ -1031,28 +1053,43 @@ const chart = (category, startClick) => {
           pi     = Array.from(flows.keys()).indexOf(key),
           pathEl = svg.selectAll("path").nodes()[pi],
           L      = pathEl.getTotalLength(),
-          cls    = `${sanitize(tgt.depression)}__${sanitize(tgt.cat)}`,
-          circ   = Cg.select(`circle.${cls}`),
-          lbl    = Cg.select(`text.${cls}__label`);
+          dep    = tgt.depression;
 
     d3.select(this)
-      .transition().delay(i*30).duration(2000)
+      .transition().delay(i * 30).duration(2000)
       .attrTween("transform", () => t => {
         const p = pathEl.getPointAtLength(t * L);
         if (t === 1) {
-          counts[tgt.depression][tgt.cat] += 1;
-          const c   = counts[tgt.depression][tgt.cat];
-          const pct = c / totalByBin[tgt.depression];
-          const r   = 25 + pct * 40;
-          circ.transition().duration(300).attr("r", r);
-          lbl.text(`${Math.round(pct*100)}%`).transition().duration(300).attr("opacity",1);
+          counts[dep][tgt.cat] += 1;
+          let cumulative = 0;
+          leftBins.forEach(cat => {
+            const c   = counts[dep][cat];
+            const pct = c / totalByBin[dep];
+            const w   = pct * barMaxWidth;
+
+            barGroups[dep]
+              .select(`rect.${sanitize(dep)}__${sanitize(cat)}`)
+              .transition().duration(300)
+              .attr("x", cumulative)
+              .attr("width", w);
+
+            barGroups[dep]
+              .select(`text.${sanitize(dep)}__${sanitize(cat)}__label`)
+              .transition().duration(300)
+              .attr("x", cumulative + w/2)
+              .attr("opacity", pct > 0.05 ? 1 : 0)
+              .text(`${Math.round(pct * 100)}%`);
+
+            cumulative += w;
+          });
         }
         return `translate(${p.x - d.x0},${p.y - d.y0})`;
       });
   });
 
   return svg.node();
-}
+};
+
 
 ```
 
