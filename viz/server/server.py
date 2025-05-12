@@ -5,7 +5,9 @@ from ml_model import predict_from_user_profile
 
 app = Flask(__name__)
 
-# Enable CORS for all routes and allow all origins
+# Enable CORS for all routes and allow specific origins
+# local host origins: 
+# CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000"]}})
 CORS(app)  # Allow all origins
 
 # Route to save the user profile JSON and make predictions
@@ -40,4 +42,5 @@ def save_profile():
         return jsonify({"success": False, "message": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(port=3005, debug=True)
+    # app.run(port=3005, debug=True)
+    app.run()
