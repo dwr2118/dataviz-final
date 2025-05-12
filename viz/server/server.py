@@ -41,6 +41,6 @@ def save_profile():
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
-if __name__ == '__main__':
-    # app.run(port=3005, debug=True)
-    app.run()
+# if __name__ == '__main__':
+#     # app.run(port=3005, debug=True)
+#     app.run()
