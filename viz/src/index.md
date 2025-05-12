@@ -660,7 +660,9 @@ let submitUserProfile = Inputs.button("Get Prediction",
      
      try {
        // Send the POST request
-       const response = await fetch("http://localhost:3005/save-profile", {
+       // local testing: 
+       // const response = await fetch("http://localhost:3005/save-profile", {
+       const response = await fetch("https://dataviz-final.onrender.com/save-profile", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(userProfile),
