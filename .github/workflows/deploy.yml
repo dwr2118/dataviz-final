@@ -24,8 +24,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: viz/package-lock.json
       - run: npm ci
+        working-directory: viz
       - run: npm run build
+        working-directory: viz
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
