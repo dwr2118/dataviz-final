@@ -13,7 +13,7 @@ The app is publicly available at:
 
 ## Local Development
 
-To install the required dependencies, run:
+To install the required dependencies, run within the viz/ directory:
 
 ```sh
 npm install
