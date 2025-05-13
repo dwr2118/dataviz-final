@@ -26,10 +26,8 @@ body{
   margin: 0;
   padding: 0.1rem; /* More space between body edge and .section blocks */
   max-width: 100vw;
-  height: 100vh;
   font-family: var(--sans-serif);
   box-sizing: border-box;
-  overflow: hidden; /* Prevent body-level scrolling */
   background-color: #e5e3e4;
 }
 
@@ -48,78 +46,98 @@ p {
   grid-auto-rows: unset;
 }
 
-.section {
-  position: absolute;
-  width: 100%; /* Full width of the viewport */
+.title-section {
   height: 100vh;
-  margin: 0 auto; /* Center the content */
-  padding: 1rem; /* Add some padding for spacing */
-  box-sizing: border-box; /* Include padding in width calculation */
-  overflow-y: auto; /* Allow section-level scrolling */
-  margin-bottom: 20vh;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s ease;
-  z-index: 0;
+  background-color: #e5e3e4;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  transition: all 0.3s ease;
+  margin: 1rem;
+  padding: 1rem;
 }
 
-.section.active {
-      opacity: 1;
-      visibility: visible;
-      z-index: 1;
-    }
+.transition-section{
+  display: flex;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.transition-section.visible{
+    opacity: 1;
+}
+
+.section {
+  background-color: #e5e3e4;
+  margin: 20px auto;
+  width: 90%;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.section-header {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2em;
+}
 
 .section-content {
-      margin: 0 auto;
-    }
+  max-height: 0;
+  overflow-y: auto;
+  transition: max-height 0.4s ease;
+  padding: 0 20px;
+}
 
-.scroll-button {
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 15px 30px;
-      font-size: 1rem;
-      /* background-color: #007BFF; */
-      color: white;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      z-index: 10;
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
+.section-content.open {
+  padding: 20px;
+}
 
-    .scroll-button:hover {
-      background-color: #0056b3;
-    }
+.section-content-inner {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-    .scroll-button.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
+.section-content.open .section-content-inner {
+  opacity: 1;
+}
 
-    #scroll-down {
-      bottom: 5px;
-    }
+button.toggle-btn {
+  background-color: #e5e3e4;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  padding: 5px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  line-height: 1;
+}
 
-    #scroll-up {
-      top: 5px;
-    }
+button.toggle-btn:hover {
+  background-color: #5A5859;
+}
 
 .card-borderless {
-    padding: 1rem;
-    margin: 1rem 0;
-    font: 14px var(--sans-serif);
-    grid-row: span 1;
-    grid-column: span 1;
+  padding: 1rem;
+  margin: 1rem 0;
+  font: 14px var(--sans-serif);
+  grid-row: span 1;
+  grid-column: span 1;
 }
 
 #prediction-results p {
-    font-size: 16px; /* Match the font size of other paragraphs */
-    color: black;  /* Inherit the color from the parent container */
-    line-height: 1.5; /* Match the line height for better readability */
-    margin: 0.5rem 0; /* Add consistent spacing between lines */
+  font-size: 16px; /* Match the font size of other paragraphs */
+  color: black;  /* Inherit the color from the parent container */
+  line-height: 1.5; /* Match the line height for better readability */
+  margin: 0.5rem 0; /* Add consistent spacing between lines */
 }
 
 .inputs-3a86ea textarea {
@@ -137,9 +155,8 @@ p {
 
 <!-- SLIDE 1: Title landing page -->
 <body>
-
-<div class="section active" id="section-0">
-<div class = "section-content">
+<section class="transition-section fade-section">
+<div class="title-section">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -164,11 +181,11 @@ p {
   </div>
 </div>
 </div>
-</div>
+</section>
 
 <!-- SLIDE 2: What does the data say? -->
-<div class="section" id="section-1">
-<div class = "section-content">
+<section class="transition-section fade-section">
+<div class="title-section">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -191,12 +208,16 @@ p {
   </div>
 </div>
 </div>
-</div>
+</section>
 
 <!-- Feature Cards: Age and Gender -->
-<div class="section" id="section-2">
+<div class="section">
+    <div class="section-header">
+      Age and Gender
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
-<div class="grid grid-cols-2">
+  <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-2 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
       <h1 class="no-max-width">
@@ -216,19 +237,23 @@ p {
     <p> Enter Your Age: ${view(ageInput)} </p> <br><br><br>
     <p> Enter Your Gender: ${view(genderInput)}</p>
   </div>
-
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Age</h1><br><br> <div id="chart-container-age"> ${view(startAge)} </div>
     <h1>Depression by Gender</h1> <div id="chart-container-gender"> ${view(startGender)} </div>
   </div>
+  </div>
 </div>
-</div>
+
 </div>
 
 
 <!-- Feature Cards: Academic Pressure -->
-<div class="section" id="section-3">
+<div class="section">
+<div class="section-header">
+      Academic Pressure
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
@@ -263,9 +288,12 @@ p {
 </div>
 
 <!-- Feature Cards: Sleep Habits -->
-<div class="section" id="section-4">
+<div class="section">
+    <div class="section-header">
+      Sleep Habits
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -293,16 +321,18 @@ p {
     <div id="chart-container-sleep"> ${view(startSleep)} </div>
     
   </div>
-
 </div>
 
 </div>
 </div>
 
 <!-- Feature Cards: Study Habits and Study Hours -->
-<div class="section" id="section-5">
+<div class="section">
+    <div class="section-header">
+      Study Habits and Hours
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -318,7 +348,6 @@ p {
     Higher satisfaction with studying is linked to lower depression counts; higher study satisfaction can lead to better mental well-being by fostering a sense of accomplishment and reducing stress. <br><br>
     Increased study hours often correlate with higher levels of depression, suggesting that overworking can lead to burnout. 
     </p>
-    
   </div>
 
   <!-- User Interaction Div -->
@@ -330,6 +359,7 @@ p {
     <p> Enter the amount of hours you typically study weekly </p>
     <p> ${view(studyHoursInput)} </p>
   </div>
+
   <!-- Data div -->
   <div class="large-data-card" id="chart-container" style="justify-content:center; flex-wrap: wrap;">
     <h1>Depression by Study Satisfaction Levels</h1>
@@ -341,9 +371,12 @@ p {
 
 
 <!-- Feature Cards: Financial Stress -->
-<div class="section" id="section-6">
+<div class="section">
+    <div class="section-header">
+      Financial Stress
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -376,9 +409,12 @@ p {
 
 
 <!-- Insights Summary Card:  -->
-<div class="section" id="section-7">
+<div class="section">
+    <div class="section-header">
+      Insights
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -407,9 +443,12 @@ p {
 </div>
 
  <!-- ML Predictor Card -->
-<div class="section" id="section-8">
+<div class="section">
+    <div class="section-header">
+      ML Powered Depression Risk Predictor
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -421,8 +460,8 @@ p {
   <div class="card-borderless grid-rowspan-3" style="grid-row: span 6;">
     <h1 style="font-size: 20px;">This tool uses a machine learning model to analyze your lifestyle factors and predict whether you might be at a higher risk of depression. By considering inputs such as dietary habits, suicidal thoughts, family history of mental illness, and more, the model provides a personalized prediction based on your profile.</h1>
     <br>
-    
   </div>
+
   <!-- Data div -->
   <div class="large-data-card" id="chart-container">
     <p style="font-size: 16px;"> To use this tool: </p>
@@ -467,9 +506,12 @@ p {
 </div>
 
   <!-- Mental Health Resources  Card -->
-<div class="section" id="section-9">
+<div class="section">
+    <div class="section-header">
+      Mental Health Resources
+      <button class="toggle-btn" onclick="toggleSection(this)">➕</button>
+    </div>
 <div class = "section-content">
-
 <div class="grid grid-cols-2">
   <!-- Page Title div -->
   <div class="card-borderless grid-colspan-4 grid-rowspan-1" style="display: flex; justify-content: center; align-items: center; text-align: center;">
@@ -493,6 +535,47 @@ p {
 </div>
 </div>
 </div>
+
+<script>
+    //Fade transitions for opening sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.3 
+    });
+    document.querySelectorAll('.fade-section').forEach(section => {
+      observer.observe(section);
+    });
+</script>
+
+<script>
+    //Button functionality for opening/closing sections
+    function toggleSection(button) {
+      const currentSection = button.closest('.section');
+      const currentContent = currentSection.querySelector('.section-content');
+      const isOpen = currentContent.classList.contains('open');
+
+      // Close all sections
+      document.querySelectorAll('.section-content').forEach(content => {
+        content.style.maxHeight = null;
+        content.classList.remove('open');
+      });
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.textContent = '➕';
+      });
+
+      // Open clicked section if it wasn't already open
+      if (!isOpen) {
+        currentContent.classList.add('open');
+        currentContent.style.maxHeight = currentContent.scrollHeight + "px";
+        button.textContent = '➖';
+      }
+    }
+</script>
 
 <!-- loading chart data-->
 ```js
@@ -1178,54 +1261,4 @@ const startFinancialStress = Inputs.button("Start Financial Stress", {
   }
 });
 ```
-
-<button id="scroll-up" class="scroll-button hidden" onclick="scrollToPrevious()">↑</button>
-<button id="scroll-down" class="scroll-button" onclick="scrollToNext()">↓</button>
-<script>
-  const sections = document.querySelectorAll('.section');
-    const btnUp = document.getElementById('scroll-up');
-    const btnDown = document.getElementById('scroll-down');
-    let currentIndex = 0;
-    let isTransitioning = false;
-    function updateButtons() {
-      btnUp.classList.toggle('hidden', currentIndex === 0);
-      btnDown.classList.toggle('hidden', currentIndex === sections.length - 1);
-    }
-    function transitionToSection(index) {
-      if (isTransitioning || index === currentIndex || index < 0 || index >= sections.length) return;
-      isTransitioning = true;
-      const current = sections[currentIndex];
-      const next = sections[index];
-      current.classList.remove('active');
-      // Wait for fade out, then show new section
-      setTimeout(() => {
-        next.scrollTop = 0; // Reset scroll position
-        next.classList.add('active');
-        currentIndex = index;
-        updateButtons();
-        isTransitioning = false;
-      }, 250); // Must match CSS transition time
-      // If section-8 is now active, add HTML to its chart-container
-      if (next.id === "section-8") {
-        // Show the user's input for the ML predictor
-        document.getElementById("hidden-ml-inputs").style.display = "block";
-      }
-    }
-
-
-    function scrollToNext() {
-      transitionToSection(currentIndex + 1);
-    }
-    function scrollToPrevious() {
-      transitionToSection(currentIndex - 1);
-    }
-    // Prevent manual section switching
-    window.addEventListener('keydown', e => {
-      const keys = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', ' '];
-      if (keys.includes(e.key)) {
-        e.preventDefault();
-      }
-    });
-    updateButtons();
-</script>
 </body>
