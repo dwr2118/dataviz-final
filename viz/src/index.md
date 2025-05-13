@@ -131,7 +131,7 @@ p {
 }
 
 .inputs-3a86ea select {
-  color: white; /* Override the color for dropdowns only */
+  color: white;
 }
 </style>
 
@@ -433,22 +433,24 @@ p {
       <li>The result will indicate whether the model predicts a higher or lower risk of depression, along with the confidence level of the prediction.</li>
     </ul>
     <br>
-      <!-- TODO: allow the user to see what they have entered before hand -->
-    <!-- input from previous pages: gender, age-->
-    <!-- ${view(genderInput)}
-    ${view(ageInput)} -->
-    <!-- ${view(studySatisfactionInput)}  -->
-    <!-- ${view(sleepInput)} -->
-    <p> ${view(dietInput)}
-    <!-- ${view(academicPressureInput)} -->
-    ${view(suicideThoughtsInput)}
-    <!-- ${view(studyHoursInput)} -->
-    <!-- ${view(financialStressInput)} -->
-    ${view(familyHistory)}
-    <br>
-    ${display(submitUserProfile)} </p>
+    <div id="hidden-ml-inputs" style="display:none;">
+    <!-- inputs to be loaded in when the page loads -->
+      <!-- only dietInput, suicideThoughtsInput and familyHistory buttons are showing
+            not sure why the rest are broken 
+      -->
+      <div> <p>${view(ageInput)} </p></div>
+      <div> <p>${view(studySatisfactionInput)} </p></div>
+      <div> <p>${view(sleepInput)} </p></div>
+      <div> <p>${view(dietInput)} </p></div>
+      <div> <p>${view(academicPressureInput)} </p></div>
+      <div> <p>${view(suicideThoughtsInput)} </p></div>
+      <div> <p>${view(studyHoursInput)} </p></div>
+      <div> <p>${view(financialStressInput)} </p></div>
+      <div> <p>${view(familyHistory)} </p></div>
+      <div> <p>${display(submitUserProfile)} </p></div>
+    </div>
     <div id="prediction-results" style="margin-top: 20px;">
-      <!-- Results will be displayed here -->
+              <!-- Results will be displayed here -->
     </div>
   </div>
 </div>
@@ -456,7 +458,7 @@ p {
 </div>
 
   <!-- Mental Health Resources  Card -->
-<div class="section" id="section-8">
+<div class="section" id="section-9">
 <div class = "section-content">
 
 <div class="grid grid-cols-2">
@@ -1096,9 +1098,6 @@ const chart = (category, startClick) => {
 ```
 
 ```js
-// TODO: animations can only play once right now, fix chart styling and text styling to make it look neat
-// and record video 
-// animation button definitions 
 const startSleep          = Inputs.button("Start Sleep Duration", {
   reduce: () => {
     const container = document.getElementById("chart-container-sleep");
@@ -1197,7 +1196,14 @@ const startFinancialStress = Inputs.button("Start Financial Stress", {
         updateButtons();
         isTransitioning = false;
       }, 250); // Must match CSS transition time
+      // If section-8 is now active, add HTML to its chart-container
+      if (next.id === "section-8") {
+        // Show the user's input for the ML predictor
+        document.getElementById("hidden-ml-inputs").style.display = "block";
+      }
     }
+
+
     function scrollToNext() {
       transitionToSection(currentIndex + 1);
     }
