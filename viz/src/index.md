@@ -704,7 +704,7 @@ let submitUserProfile = Inputs.button("Get Prediction",
        // Display an error message in the #prediction-results div
        const resultsDiv = document.getElementById("prediction-results");
        resultsDiv.innerHTML = `
-         <p style="color: red;"><strong>Error:</strong> Unable to fetch prediction. Please try again later.</p>
+         <p style="color: red;"><strong>Error:</strong> Unable to fetch prediction. Please verify you've entered all lifestyle factors.</p>
        `;
      }
 
