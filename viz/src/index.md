@@ -438,19 +438,28 @@ p {
       <!-- only dietInput, suicideThoughtsInput and familyHistory buttons are showing
             not sure why the rest are broken 
       -->
-      <div> <p>${view(ageInput)} </p></div>
-      <div> <p>${view(studySatisfactionInput)} </p></div>
-      <div> <p>${view(sleepInput)} </p></div>
-      <div> <p>${view(dietInput)} </p></div>
-      <div> <p>${view(academicPressureInput)} </p></div>
+      <!-- <div style="color: black;"><p> ${view(ageInput)} </p></div> -->
+      <div style="color: black;">Inputted Age: ${ageInput.value}</div><br>
+      <!-- <div> <p>${view(studySatisfactionInput)} </p></div> -->
+      <div style="color: black;">Study Satisfaction: ${studySatisfactionInput.value}</div><br>
+      <!-- <div>${view(sleepInput)}</div> -->
+      <div style="color: black;">Sleep Amount: ${sleepInput.value}</div>
+      <div> <p>${view(dietInput)} </p></div>  
+      <!-- <div> <p>${view(academicPressureInput)} </p></div> -->
+      <div style="color: black;">Academic Pressure: ${academicPressureInput.value}</div>
       <div> <p>${view(suicideThoughtsInput)} </p></div>
-      <div> <p>${view(studyHoursInput)} </p></div>
-      <div> <p>${view(financialStressInput)} </p></div>
+      <!-- <div> <p>${view(studyHoursInput)} </p></div> -->
+      <div style="color: black;">Study Hours: ${studyHoursInput.value}</div>
+      <!-- <div> <p>${view(financialStressInput)} </p></div> -->
+      <div style="color: black;">Financial Stress: ${financialStressInput.value}</div>
       <div> <p>${view(familyHistory)} </p></div>
       <div> <p>${display(submitUserProfile)} </p></div>
     </div>
     <div id="prediction-results" style="margin-top: 20px;">
-              <!-- Results will be displayed here -->
+      <!-- Results will be displayed here -->
+      <p style="font-size: 14px; color: #b8860b; margin-top: 10px;">
+        <em>Note: If the prediction takes a few seconds, the server may be waking up. Please wait up to 10 seconds for results to appear.</em>
+      </p>
     </div>
   </div>
 </div>
