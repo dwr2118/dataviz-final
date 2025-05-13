@@ -1,6 +1,6 @@
 ---
 theme: dashboard
-title: Skeleton for Final Viz 
+title: Predicting Student Depression Risk
 toc: false
 sidebar: false
 pager: false
@@ -472,25 +472,25 @@ button.toggle-btn:hover {
       <li>The result will indicate whether the model predicts a higher or lower risk of depression, along with the confidence level of the prediction.</li>
     </ul>
     <br>
-    <div id="hidden-ml-inputs" style="display:none;">
+    <div id="hidden-ml-inputs" style="display:block;">
     <!-- inputs to be loaded in when the page loads -->
       <!-- only dietInput, suicideThoughtsInput and familyHistory buttons are showing
             not sure why the rest are broken 
       -->
       <!-- <div style="color: black;"><p> ${view(ageInput)} </p></div> -->
-      <div style="color: black;">Inputted Age: ${ageInput.value}</div><br>
+      <!-- <div style="color: black;">Inputted Age: ${ageInput.value}</div><br> -->
       <!-- <div> <p>${view(studySatisfactionInput)} </p></div> -->
-      <div style="color: black;">Study Satisfaction: ${studySatisfactionInput.value}</div><br>
+      <!-- <div style="color: black;">Study Satisfaction: ${studySatisfactionInput.value}</div><br> -->
       <!-- <div>${view(sleepInput)}</div> -->
-      <div style="color: black;">Sleep Amount: ${sleepInput.value}</div>
+      <!-- <div style="color: black;">Sleep Amount: ${sleepInput.value}</div> -->
       <div> <p>${view(dietInput)} </p></div>  
       <!-- <div> <p>${view(academicPressureInput)} </p></div> -->
-      <div style="color: black;">Academic Pressure: ${academicPressureInput.value}</div>
+      <!-- <div style="color: black;">Academic Pressure: ${academicPressureInput.value}</div> -->
       <div> <p>${view(suicideThoughtsInput)} </p></div>
       <!-- <div> <p>${view(studyHoursInput)} </p></div> -->
-      <div style="color: black;">Study Hours: ${studyHoursInput.value}</div>
+      <!-- <div style="color: black;">Study Hours: ${studyHoursInput.value}</div> -->
       <!-- <div> <p>${view(financialStressInput)} </p></div> -->
-      <div style="color: black;">Financial Stress: ${financialStressInput.value}</div>
+      <!-- <div style="color: black;">Financial Stress: ${financialStressInput.value}</div> -->
       <div> <p>${view(familyHistory)} </p></div>
       <div> <p>${display(submitUserProfile)} </p></div>
     </div>
