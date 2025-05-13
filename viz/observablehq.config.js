@@ -39,6 +39,5 @@ export default {
   dynamicPaths: [
     // Paths to files that should be copied to the output directory.
     // These are relative to the root directory.
-    "/chart.js"
   ]
 };
